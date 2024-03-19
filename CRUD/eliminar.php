@@ -9,12 +9,12 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
         
         $sql = "DELETE FROM personas WHERE documento_per = $id"; 
         if ($conn->query($sql) === TRUE) {
-            echo "Registro eliminado correctamente.";
+            echo "<p>Registro eliminado correctamente.</p>";
         } else {
-            echo "Error al eliminar el registro: " . $conn->error;
+            echo "<p>Error al eliminar el registro: " . $conn->error . "</p>";
         }
     } else {
-        echo "<script>
+        $confirmDelete = "<script>
             var confirmDelete = confirm('¿Estás seguro de eliminar este registro?');
             if(confirmDelete) {
                 window.location.href = 'eliminar.php?id=$id&confirm=yes';
@@ -22,6 +22,8 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
                 window.location.href = 'Tabla_usuarios.php'; 
             }
         </script>";
+        
+        echo $confirmDelete;
     }
 }
 ?>

@@ -1,51 +1,36 @@
+/* Estilos para centrar el contenido */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 50px auto;
-    max-width: 400px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-h2 {
-    color: #333;
+.container {
+    width: 50%; /* Ancho ajustable según tus necesidades */
+    text-align: center;
 }
 
 form {
-    text-align: left;
+    margin-bottom: 20px; /* Agregamos un margen inferior al formulario */
 }
 
-label {
-    font-weight: bold;
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+}
+.blue-btn {
+    background-color: #007bff; /* Color de fondo azul */
+    color: #fff; /* Color de texto blanco */
+    padding: 10px 20px; /* Padding interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor al pasar por encima */
+    font-size: 16px; /* Tamaño de la fuente */
 }
 
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-input[type="submit"] {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-.volver-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+/* Estilos al pasar el cursor por encima */
+.blue-btn:hover {
+    background-color: #0056b3; /* Color de fondo azul más oscuro */
 }

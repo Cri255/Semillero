@@ -43,9 +43,25 @@ include('conexion.php');
 					<li class="text-condensedLight noLink" ><small>Nombre: <?php echo $_SESSION['nombre'] ?>
 						</small></li>
 					<li class="noLink">
-						<figure>
-							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+
+					<figure class="full-width" style="height: 77px;">
+				<div class="navLateral-body-cl">
+				<figure>
+							<?php if(isset($_SESSION['imagen'])): ?>
+								<img src="<?php echo $_SESSION['imagen']; ?>" alt="Avatar" class="img-responsive">
+							<?php else: ?>
+								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+							<?php endif; ?>
 						</figure>
+				</div>
+				<figcaption class="navLateral-body-cr hide-on-tablet">
+					<span>
+					Nombre: <?php echo $_SESSION['nombre'] ?> <br>
+						<small>Rol: <?php echo $_SESSION['rol'] ?> </small>
+					</span>
+					</figcaption>
+						</figure>
+
 					</li>
 				</ul>
 			</nav>
@@ -61,7 +77,13 @@ include('conexion.php');
 			</div>
 			<figure class="full-width" style="height: 77px;">
 				<div class="navLateral-body-cl">
-					<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+				<figure>
+							<?php if(isset($_SESSION['imagen'])): ?>
+								<img src="<?php echo $_SESSION['imagen']; ?>" alt="Avatar" class="img-responsive">
+							<?php else: ?>
+								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+							<?php endif; ?>
+						</figure>
 				</div>
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>
@@ -257,6 +279,16 @@ include('conexion.php');
 						</div>
 					</a>
 				</li>
+				<li class="full-width">
+					<a href="./programas_academicos/index.php" class="full-width">
+						<div class="navLateral-body-cl">
+							<i class="zmdi zmdi-library"></i> <!-- Icono de Programas Académicos -->
+						</div>
+						<div class="navLateral-body-cr hide-on-tablet">
+							Programas Académicos
+						</div>
+					</a>
+				</li>
 			</ul>			
 
 			</ul>	
@@ -280,7 +312,7 @@ if ($_SESSION['tipo'] == 3) { // Comprobar si es admin
         $estado = $_POST['estadoprof'];
         $password = $_POST['passwordprof'];
         $tipo_identificador = '2';
-        $codigo_semillero = '1';
+        $codigo_semillero = $_POST['semillero_prof'];;
 
         // Insertar datos en la base de datos
         $sql = "INSERT INTO personas (documento_per, nombre_per, apellidos_per, fechanacimiento, telefono_per, foto_per, email_per, estado_per, password_per, codigo_tip, codigo_sem)
@@ -314,144 +346,138 @@ if ($_SESSION['tipo'] == 3) { // Comprobar si es admin
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Formulario</title>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
-	<section class="full-width pageContent">
-		<section class="full-width header-well">
-		
-		</section>
-		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewAdmin" class="mdl-tabs__tab is-active">Agregar un nuevo profesor</a>
-			</div>
-			<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
-				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-						<div class="full-width panel mdl-shadow--2dp">
-							<div class="full-width panel-tittle bg-primary text-center tittles">
-								Nuevo Profesor
-							</div>
+    <section class="full-width pageContent">
+        <section class="full-width header-well">
+        
+        </section>
+        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+            <div class="mdl-tabs__tab-bar">
+                <a href="#tabNewAdmin" class="mdl-tabs__tab is-active">Agregar un nuevo profesor</a>
+            </div>
+            <div class="mdl-tabs__panel is-active" id="tabNewAdmin">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+                        <div class="full-width panel mdl-shadow--2dp">
+                            <div class="full-width panel-tittle bg-primary text-center tittles">
+                                Nuevo Profesor
+                            </div>
 
-						<div class="full-width panel-content">
-								<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                            <div class="full-width panel-content">
+                                <form method="post" enctype="multipart/form-data">
+                                    <div class="mdl-grid">
+                                        <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+                                            <h5 class="text-condensedLight">Información del Profesor</h5>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="cedulapro" name="cedulaprof">
+                                                <label class="mdl-textfield__label" for="cedulapro">Documento</label>
+                                                <span class="mdl-textfield__error">Número inválido</span>
+                                            </div>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="Nameprof" name="Nameprof">
+                                                <label class="mdl-textfield__label" for="Nameprof">Nombre</label>
+                                                <span class="mdl-textfield__error">Nombre inválido</span>
+                                            </div>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="LastNameprof" name="LastNameprof">
+                                                <label class="mdl-textfield__label" for="LastNameprof">Apellido</label>
+                                                <span class="mdl-textfield__error">Apellido inválido</span>
+                                            </div>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="date" id="fech_nacimiento_prof" name="fech_nacimiento_prof">
+                                                <label class="mdl-textfield__label" for="fech_nacimiento_prof">Fecha de Nacimiento</label>
+                                            </div>
 
-							<div class="full-width panel-content">
-								<form method="post">
-									<div class="mdl-grid">
-										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-											<h5 class="text-condensedLight">Información del Profesor</h5>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="cedulapro" name="cedulaprof">
-												<label class="mdl-textfield__label" for="cedulapro">Documento</label>
-												<span class="mdl-textfield__error">Invalid number</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="Nameprof" name="Nameprof">
-												<label class="mdl-textfield__label" for="Nameprof">Nombre</label>
-												<span class="mdl-textfield__error">Invalid name</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="LastNameprof" name="LastNameprof">
-												<label class="mdl-textfield__label" for="LastNameprof">Apellido</label>
-												<span class="mdl-textfield__error">Invalid last name</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="fech_nacimiento_prof" name="fech_nacimiento_prof">
-												<label class="mdl-textfield__label" for="fech_nacimiento_prof">Fecha de nacimiento AA/MM/DD</label>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneprof" name="phoneprof">
-												<label class="mdl-textfield__label" for="phoneprof">Telefono</label>
-												<span class="mdl-textfield__error">Invalid phone number</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-											<input class="mdl-textfield__input" type="email" id="emailprof" name="emailprof">
-												<label class="mdl-textfield__label" for="emailprof">Correo Electronico</label>
-												<span class="mdl-textfield__error">Invalid E-mail</span>
-											</div>
-											
-										</div>
-										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-											<h5 class="text-condensedLight">Detalles de la cuenta</h5>
-												
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<label class="mdl-textfield__label" for="estadoprof">Estado</label>
-												<select class="mdl-textfield__input" id="estadoprof" name="estadoprof">
-													<option value="Activo">Activo</option>
-													<option value="Inactivo">Inactivo</option>
-												</select>
-												<span class="mdl-textfield__error">Invalid user name</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-											<input class="mdl-textfield__input" type="password" id="passwordprof" name="passwordprof">
-												<label class="mdl-textfield__label" for="passwordprof">Contraseña</label>
-												<span class="mdl-textfield__error">Invalid password</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<select class="mdl-textfield__input" id="semillero_prof" name="semillero_prof" required>
-													<option value="">Seleccionar Semillero</option>
-													<?php
-													include('../conexion.php');
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneprof" name="phoneprof">
+                                                <label class="mdl-textfield__label" for="phoneprof">Teléfono</label>
+                                                <span class="mdl-textfield__error">Número de teléfono inválido</span>
+                                            </div>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="email" id="emailprof" name="emailprof">
+                                                <label class="mdl-textfield__label" for="emailprof">Correo Electrónico</label>
+                                                <span class="mdl-textfield__error">Correo electrónico inválido</span>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+                                            <h5 class="text-condensedLight">Detalles de la cuenta</h5>
+                                                
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <label class="mdl-textfield__label" for="estadoprof">Estado</label>
+                                                <select class="mdl-textfield__input" id="estadoprof" name="estadoprof">
+                                                    <option value="Activo">Activo</option>
+                                                    <option value="Inactivo">Inactivo</option>
+                                                </select>
+                                                <span class="mdl-textfield__error">Estado inválido</span>
+                                            </div>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="password" id="passwordprof" name="passwordprof">
+                                                <label class="mdl-textfield__label" for="passwordprof">Contraseña</label>
+                                                <span class="mdl-textfield__error">Contraseña inválida</span>
+                                            </div>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <select class="mdl-textfield__input" id="semillero_prof" name="semillero_prof" required>
+                                                    <option value="">Seleccionar Semillero</option>
+                                                    <?php
+                                                    include('../conexion.php');
 
-													// Consultar los semilleros para mostrar en la lista desplegable
-													$query_semilleros = $conn->query("SELECT codigo_sem, nombre_sem FROM semilleros");
+                                                    // Consultar los semilleros para mostrar en la lista desplegable
+                                                    $query_semilleros = $conn->query("SELECT codigo_sem, nombre_sem FROM semilleros");
 
-													if ($query_semilleros && $query_semilleros->num_rows > 0) {
-														while ($semillero = $query_semilleros->fetch_assoc()) {
-															echo "<option value='" . $semillero['codigo_sem'] . "'>" . $semillero['nombre_sem'] . "</option>";
-														}
-													} else {
-														echo "<option value='' disabled>No hay semilleros disponibles</option>";
-													}
+                                                    if ($query_semilleros && $query_semilleros->num_rows > 0) {
+                                                        while ($semillero = $query_semilleros->fetch_assoc()) {
+                                                            echo "<option value='" . $semillero['codigo_sem'] . "'>" . $semillero['nombre_sem'] . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value='' disabled>No hay semilleros disponibles</option>";
+                                                    }
 
-													$conn->close();
-													?>
-												</select>
-											</div>
-											</form>
+                                                    $conn->close();
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <style>
 
-											<style>
+                                                        body, html {
+                                                            height: 100%;
+                                                            margin: 0;
+                                                            display: flex;
+                                                            justify-content: center;
+                                                            align-items: center;
+                                                        }
 
-														body, html {
-															height: 100%;
-															margin: 0;
-															display: flex;
-															justify-content: center;
-															align-items: center;
-														}
-
-														.container {
-															text-align: center;
-														}
-													</style>
-												</head>
-												<body>
-													<div class="container">
-														<h3>Subir Foto de Perfil</h3>
-														</form>
-																<input type="file" name="fileToUpload" id="fileToUpload">
-																<input type="submit" value="Enviar" name="submit">
-															</form>
-										</div>
-									</div>
-									</div>
-									<p class="text-center">
-									</p>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-		<?php
-			
-			?>
-	</section>
-</body>
+                                                        .container {
+                                                            text-align: center;
+                                                        }
+                                                    </style>
+                                                </head>
+                                                <body>
+                                                    <div class="container">
+                                                        <h3>Subir Foto de Perfil</h3>
+                                                        
+                                                        <input type="file" name="fileToUpload" id="fileToUpload">
+                                                        <input type="submit" value="Enviar" name="submit">
+                                                    </div>
+                                                </body>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-center">
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </body>
 </html>

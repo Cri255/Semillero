@@ -8,6 +8,8 @@
 <body>
     <h2>Lista de Semilleros</h2>
     <a href="create.php">Crear Nuevo Semillero</a>
+    <br></br>
+    <a href="../admin.php">ir a inicio</a>
     <br><br>
     <table>
         <tr>

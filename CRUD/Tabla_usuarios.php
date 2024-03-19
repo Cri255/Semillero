@@ -11,59 +11,17 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>CRUD DE USUARIOS</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        img {
-            max-width: 50px;
-            max-height: 50px;
-        }
-
-        .btn-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            border-radius: 4px;
-        }
-    </style>
+    
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="tabla_usuarios.css">
+</head>
 
 <body>
-    <h1>CRUD de Personas</h1>
-
-    <div class="btn-container">
-        <a href="../admin.php" class="btn">Página Principal</a>
-    </div>
+    <h1>Usuarios Registrados</h1>
+    <a href="../admin.php" class="btn btn-primary">Página Principal</a>
+    <br></br>
 
     <table>
         <tr>

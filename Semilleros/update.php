@@ -8,11 +8,8 @@
 <body>
     <h2>Actualizar Semillero</h2>
     <?php
-      
         include("../conexion.php");
-
         $codigo_sem = $_GET['codigo_sem'];
-
         $sql = "SELECT * FROM semilleros WHERE codigo_sem='$codigo_sem'";
         $result = $conn->query($sql);
 
@@ -23,8 +20,30 @@
                 <input type="hidden" name="codigo_sem" value="<?php echo $row['codigo_sem']; ?>">
                 Nombre: <input type="text" name="nombre_sem" value="<?php echo $row['nombre_sem']; ?>"><br>
                 Fecha de Creación: <input type="date" name="fechacreacion_sem" value="<?php echo $row['fechacreacion_sem']; ?>"><br>
-                Estado: <input type="text" name="estado_sem" value="<?php echo $row['estado_sem']; ?>"><br>
-                Código del Programa: <input type="text" name="codigo_pro" value="<?php echo $row['codigo_pro']; ?>"><br>
+                <label for="estado_sem">Estado:</label>
+                <label for="estado_sem" class="rounded-label">Estado:</label>
+                <select name="estado_sem" id="estado_sem" class="rounded-dropdown">
+                    <option value="Activo" <?php if($row['estado_sem'] == 'Activo') echo 'selected'; ?>>Activo</option>
+                    <option value="Inactivo" <?php if($row['estado_sem'] == 'Inactivo') echo 'selected'; ?>>Inactivo</option>
+                </select><br></br>
+
+
+                Código del Programa:
+                <select name="codigo_pro">
+                    <?php
+                        $programas_sql = "SELECT codigo_pro, nombre_pro FROM programas";
+                        $programas_result = $conn->query($programas_sql);
+                        if ($programas_result->num_rows > 0) {
+                            while($programa = $programas_result->fetch_assoc()) {
+                                echo "<option value='" . $programa['codigo_pro'] . "'";
+                                if ($row['codigo_pro'] == $programa['codigo_pro']) {
+                                    echo " selected";
+                                }
+                                echo ">" . $programa['nombre_pro'] . "</option>";
+                            }
+                        }
+                    ?>
+                </select><br></br>
                 <input type="submit" value="Actualizar">
                 <br> </br>
                 <a href="../admin.php" class="btn">Ir al inicio</a>

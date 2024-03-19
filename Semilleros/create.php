@@ -44,29 +44,30 @@
         
         <!-- Campo de selección de código del programa -->
         <div class="dropdown">
-            <label for="codigo_pro">Código del Programa:</label>
-            <div class="dropdown-select" onclick="toggleDropdown()">
-                Seleccione un programa
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu">
-                <?php
-                    // Establecer conexión a la base de datos
-                    include("../conexion.php");
+    <label for="codigo_pro">Código del Programa:</label>
+    <select name="codigo_pro" id="codigo_pro">
+        <option value="">Seleccione un programa</option>
+        <?php
+        // Establecer conexión a la base de datos
+        include("../conexion.php");
 
-                    // Consultar programas
-                    $sql = "SELECT * FROM programas";
-                    $result = $conn->query($sql);
+        // Consultar programas
+        $sql = "SELECT * FROM programas";
+        $result = $conn->query($sql);
 
-                    // Mostrar opciones en el menú desplegable
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            echo "<div class='dropdown-menu-option' onclick='document.getElementById(\"codigo_pro\").value = \"" . $row['codigo_pro'] . "\"'>" . $row['nombre_pro'] . "</div>";
-                        }
-                    } else {
-                        echo "<div class='dropdown-menu-option'>No hay programas disponibles</div>";
-                    }
-                    $conn->close();
-                ?>
+        // Mostrar opciones en la lista desplegable
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<option value=\"" . $row['codigo_pro'] . "\">" . $row['nombre_pro'] . "</option>";
+            }
+        } else {
+            echo "<option value=\"\">No hay programas disponibles</option>";
+        }
+        $conn->close();
+        ?>
+    </select>
+</div>
+
             </div>
             <br></br>
             <input type="submit" value="Guardar">

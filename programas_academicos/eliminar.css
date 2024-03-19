@@ -1,0 +1,33 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+h2 {
+    color: #333;
+}
+.confirmar-eliminar {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+p {
+    margin-bottom: 20px;
+}
+input[type="submit"],
+input[type="button"] {
+    background-color: #007bff; /* Color azul */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px; /* Margen entre los botones */
+}
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #0056b3; /* Cambio de color al pasar el ratón */
+}

@@ -38,35 +38,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="Styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Tipos de Proyecto</title>
 </head>
 <body>
-    <h2>Ingrese un nuevo tipo de Proyectos</h2>
+    <div class="container no-border">
+        <br><br>
+        <h2>Ingrese un nuevo tipo de Proyectos</h2>
 
-    <?php if (!empty($error)): ?>
-    <!-- Mostrar mensaje de error si existe uno -->
-    <p><strong><?php echo $error; ?></strong></p>
-    <?php endif; ?>
+        <?php if (!empty($error)): ?>
+        <!-- Mostrar mensaje de error si existe uno -->
+        <p><strong><?php echo $error; ?></strong></p>
+        <?php endif; ?>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div>
-            <label for="codigo">Código del Tipo de Proyecto:</label>
-            <input type="text" id="codigo" name="codigo" value="<?php echo htmlspecialchars($codigo); ?>">
-        </div>
-        <div>
-            <label for="nombre">Nombre del Tipo de Proyecto:</label>
-            <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>">
-        </div>
-        <div>
-            <input type="submit" value="Guardar">
-            <button type="button" onclick="window.history.back()">Volver</button>
-        </div>
-    </form>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group">
+                <label for="codigo">Código del Tipo de Proyecto:</label>
+                <input type="text" class="form-control" id="codigo" name="codigo" value="<?php echo htmlspecialchars($codigo); ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre del Tipo de Proyecto:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>" required>
+            </div>
+            <div>
+                <!-- Botón tipo submit con Bootstrap -->
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                <!-- Botón con Bootstrap para volver atrás -->
+                <button type="button" class="btn btn-primary" onclick="window.history.back()">ir a inicio</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

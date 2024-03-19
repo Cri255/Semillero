@@ -96,7 +96,7 @@ $conn->close();
             <input type="text" name="mesessemillero" id="mesessemillero" required>
 
         
-        <input type="submit" name="submit" value="Agregar Estudiante Proyecto">
+        <input type="submit" name="submit" value="Enviar">
     </form>
     <form action="../admin.php" method="get">
     <input type="submit" value="Ir a Inicio">

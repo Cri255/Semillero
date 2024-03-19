@@ -6,7 +6,6 @@ include('../conexion.php');
 // Verificar si se ha enviado un formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recibir los datos del formulario
-    $codigo_pro = $_POST["codigo_pro"];
     $titulo_pro = $_POST["titulo_pro"];
     $estado_pro = $_POST["estado_pro"];
     $anio_pro = $_POST["anio_pro"];
@@ -59,14 +58,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn) {
         // Crear la consulta SQL para insertar datos en la tabla de la base de datos
         $consulta = "INSERT INTO proyectos (
-            codigo_pro, tiutlo_pro, estado_pro, anio_pro, mes_pro, palabras_pro,
+            tiutlo_pro, estado_pro, anio_pro, mes_pro, palabras_pro,
             codigo_ciu, duracion_pro, codigo_tip_pro, horassemanalider_pro, resumen,
             planteamientoproblema, justificacion, preguntainvestigacion, marcoteorico,
             estadoarte, objetivogeneral, objetivosespecificos, metodologia, cronograma,
             resultadosproductos, bibliografia, presupuesto, gastosprofesores, gastosequipos,
             gastossoftware, gastosviajes, gastosplanformacion, rutaarchivo_pro
         ) VALUES (
-            '$codigo_pro', '$titulo_pro', '$estado_pro', '$anio_pro', '$mes_pro', '$palabras_pro',
+            '$titulo_pro', '$estado_pro', '$anio_pro', '$mes_pro', '$palabras_pro',
             '$codigo_ciu', '$duracion_pro', '$codigo_tip_pro', '$horassemanalider_pro', '$resumen',
             '$planteamientoproblema', '$justificacion', '$preguntainvestigacion', '$marcoteorico',
             '$estadoarte', '$objetivogeneral', '$objetivosespecificos', '$metodologia', '$cronograma',
@@ -89,110 +88,115 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="formulario.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Formulario de Proyecto</title>
+    <title>Prueba</title>
 </head>
+<link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+<link rel="stylesheet" href="css/pico.min.css" />
+<link rel="stylesheet" href="formulario.css">
+<link rel="stylesheet" href="../root.css">
 <body>
-    <center>
-        <h2>Ingrese la Información</h2>
-    </center>
-    <div class="container">
-        <div class="column">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+    <br></br>
+  <center>
+    <h2>Formulario de Proyecto</h2>
+</center>
+<a href="../admin.php" class="btn rounded-button">ir a inicio</a>
+  <br></br>
+  <details>
+    <summary class="pico-color-blue-500" role="button">Información del Proyecto </summary>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+      
+          <label for="titulo_pro">Título del Proyecto:</label>
+          <input type="text" id="titulo_pro" name="titulo_pro" required><br><br>
+      
+          <div class="form-group">
+              <label for="estado_pro">Estado del Proyecto:</label>
+              <select class="form-control" id="estado_pro" name="estado_pro" required>
+                  <option value="">Selecciona</option>
+                  <option value="activo">Activo</option>
+                  <option value="inactivo">Inactivo</option>
+                  <option value="Finalizado">Finalizado</option>
+              </select>
+          </div>
+      
+          <label for="anio_pro">Año del Proyecto:</label>
+          <select id="anio_pro" name="anio_pro" class="form-control rounded" required>
+          <option value="">Selecciona un año</option>
+          </select>
 
+          <script>
+          // Obtener el elemento select
+          var selectAnio = document.getElementById("anio_pro");
 
-            <label for="codigo_pro">Código del Proyecto:</label>
-                <input type="text" id="codigo_pro" name="codigo_pro" required><br><br>
-            
-                <label for="titulo_pro">Título del Proyecto:</label>
-                <input type="text" id="titulo_pro" name="titulo_pro" required><br><br>
-            
-                <div class="form-group">
-                    <label for="estado_pro">Estado del Proyecto:</label>
-                    <select class="form-control" id="estado_pro" name="estado_pro" required>
-                        <option value="">Selecciona</option>
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
-                        <option value="Finalizado">Finalizado</option>
-                    </select>
-                </div>
-            
-                <label for="anio_pro">Año del Proyecto:</label>
-                <select id="anio_pro" name="anio_pro" class="form-control rounded" required>
-                <option value="">Selecciona un año</option>
-                </select>
+          // Obtener el año actual
+          var añoActual = new Date().getFullYear();
 
-                <script>
-                // Obtener el elemento select
-                var selectAnio = document.getElementById("anio_pro");
+          // Agregar opciones para los próximos 10 años
+          for (var i = 0; i < 10; i++) {
+              var option = document.createElement("option");
+              option.text = añoActual + i;
+              option.value = añoActual + i;
+              selectAnio.add(option);
+          }
+          </script>
+          <br></br>
+      
+          <label for="mes_pro">Mes del Proyecto:</label>
+          <select id="mes_pro" name="mes_pro" class="form-control rounded" required>
+          <option value="">Selecciona un mes</option>
+          <option value="01">Enero</option>
+          <option value="02">Febrero</option>
+          <option value="03">Marzo</option>
+          <option value="04">Abril</option>
+          <option value="05">Mayo</option>
+          <option value="06">Junio</option>
+          <option value="07">Julio</option>
+          <option value="08">Agosto</option>
+          <option value="09">Septiembre</option>
+          <option value="10">Octubre</option>
+          <option value="11">Noviembre</option>
+          <option value="12">Diciembre</option> 
+          </select>
+          <br><br>
+      
+          <label for="palabras_pro">Palabras clave:</label>
+          <input type="text" id="palabras_pro" name="palabras_pro" required><br><br>
 
-                // Obtener el año actual
-                var añoActual = new Date().getFullYear();
-
-                // Agregar opciones para los próximos 10 años
-                for (var i = 0; i < 10; i++) {
-                    var option = document.createElement("option");
-                    option.text = añoActual + i;
-                    option.value = añoActual + i;
-                    selectAnio.add(option);
-                }
-                </script>
-                <br></br>
-            
-                <label for="mes_pro">Mes del Proyecto:</label>
-                <select id="mes_pro" name="mes_pro" class="form-control rounded" required>
-                <option value="">Selecciona un mes</option>
-                <option value="01">Enero</option>
-                <option value="02">Febrero</option>
-                <option value="03">Marzo</option>
-                <option value="04">Abril</option>
-                <option value="05">Mayo</option>
-                <option value="06">Junio</option>
-                <option value="07">Julio</option>
-                <option value="08">Agosto</option>
-                <option value="09">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option> 
-                </select>
-                <br><br>
-            
-                <label for="palabras_pro">Palabras clave:</label>
-                <input type="text" id="palabras_pro" name="palabras_pro" required><br><br>
-                
-                <?php
+          <?php
                     
-                    $query_ciudades = "SELECT * FROM ciudades";
-                    $result_ciudades = mysqli_query($conn, $query_ciudades);
+          $query_ciudades = "SELECT * FROM ciudades";
+          $result_ciudades = mysqli_query($conn, $query_ciudades);
 
-                    $options = "";
+          $options = "";
 
-                    // Verificar si la consulta devuelve resultados
-                    if ($result_ciudades && mysqli_num_rows($result_ciudades) > 0) {
-                        while ($row = mysqli_fetch_assoc($result_ciudades)) {
-                            // Construir las opciones de la lista desplegable
-                            $options .= "<option value='" . $row['codigo_ciu'] . "'>" . $row['nombre_ciu'] . "</option>";
-                        }
-                        mysqli_free_result($result_ciudades); 
-                    } else {                       
-                        $options = "<option value=''>No hay datos de ciudades disponibles</option>";
-                    }
-                    ?>
+          // Verificar si la consulta devuelve resultados
+          if ($result_ciudades && mysqli_num_rows($result_ciudades) > 0) {
+              while ($row = mysqli_fetch_assoc($result_ciudades)) {
+                  // Construir las opciones de la lista desplegable
+                  $options .= "<option value='" . $row['codigo_ciu'] . "'>" . $row['nombre_ciu'] . "</option>";
+              }
+              mysqli_free_result($result_ciudades); 
+          } else {                       
+              $options = "<option value=''>No hay datos de ciudades disponibles</option>";
+          }
+          ?>
 
-                    <label for="codigo_ciu">Ciudad:</label>
-                    <select id="codigo_ciu" class="form-control rounded" name="codigo_ciu" required>
-                        <option value="">Selecciona</option>
-                        <?php echo $options; ?>
-                    </select>
-                </select>
-                <br><br>
-            
-                <label for="duracion_pro">Duración del Proyecto:</label>
+          <label for="codigo_ciu">Ciudad:</label>
+          <select id="codigo_ciu" class="form-control rounded" name="codigo_ciu" required>
+              <option value="">Selecciona</option>
+              <?php echo $options; ?>
+          </select>
+      </select>
+      <br><br>
+  </details>
+
+
+  <details>
+    <summary role="button">Desarrollo del proyecto</summary>
+    <label for="duracion_pro">Duración del Proyecto:</label>
                 <input type="text" id="duracion_pro" name="duracion_pro" required><br><br>
    
 
@@ -224,7 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <br></br>
 
             
-                <label for="horassemanalider_pro">Horas semanales líder de proyecto:</label>
+                <label for="horassemanalider_pro">Horas semanales del líder de proyecto:</label>
                 <input type="text" id="horassemanalider_pro" name="horassemanalider_pro" required><br><br>
             
                 <label for="resumen">Resumen:</label>
@@ -324,7 +328,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="cronograma">Cronograma:</label>
             <input type="text" id="cronograma" name="cronograma" required><br><br>
         
-            <label for="resultadosproductos">Resultados productos:</label>
+            <label for="resultadosproductos">Resultados del productos:</label>
             <input type="text" id="resultadosproductos" name="resultadosproductos" required><br><br>
             
             <label for="bibliografia">Bibliografía:</label>
@@ -339,9 +343,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 box-sizing: border-box; /* Incluir borde y relleno en el tamaño total */
                 }
                 </style>
+  </details>
 
-        
-            <label for="presupuesto">Presupuesto:</label>
+  <details>
+    <summary role="button">Presupuestos</summary>
+    <label for="presupuesto">Presupuesto:</label>
             <input type="text" id="presupuesto" name="presupuesto" required><br><br>
         
             <label for="gastosprofesores">Gastos profesores:</label>
@@ -360,16 +366,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="gastosplanformacion" name="gastosplanformacion" required><br><br>
         
             <input type="file" name="archivo" id="archivo" accept=".pdf">
-            <input type="submit" value="Subir Archivo" name="submit">
+             <input type="submit" value="Enviar Información" name="submit">
             <br><br>
+  </details>
 
-
-        </div>
-    </div>
-</body>
-</html>
-            </form>
-        </div>
-    </div>
 </body>
 </html>

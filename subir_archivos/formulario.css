@@ -1,26 +1,10 @@
+label {
+    max-width: 200px; /* Puedes ajustar el valor según tus necesidades */
+    display: inline-block; /* Para que el ancho máximo funcione */
+}
 
-    .accordion-button:not(.collapsed) {
-        background-color: #007bff;
-        color: #fff;
-    }
 
-    .accordion-button {
-        background-color: #f8f9fa;
-        color: #212529;
-        border: 1px solid rgba(0, 0, 0, 0.125);
-    }
-
-    .accordion-button:hover {
-        background-color: #e2e6ea;
-    }
-
-    .accordion-button:focus {
-        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
-    }
-
-    .accordion-body {
-        border-top: 1px solid rgba(0, 0, 0, 0.125);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-        padding: 1rem;
-    }
+.rounded-button {
+     border-radius: 20px;
+ }
 

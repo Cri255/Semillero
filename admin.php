@@ -41,11 +41,17 @@ include('conexion.php');
 					</li>
 					<li class="text-condensedLight noLink" ><small>Nombre: <?php echo $_SESSION['nombre'] ?>
 						</small></li>
-					<li class="noLink">
+
+						<li class="noLink">
 						<figure>
-							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+							<?php if(isset($_SESSION['imagen'])): ?>
+								<img src="<?php echo $_SESSION['imagen']; ?>" alt="Avatar" class="img-responsive">
+							<?php else: ?>
+								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+							<?php endif; ?>
 						</figure>
-					</li>
+						</li>
+
 				</ul>
 			</nav>
 		</div>
@@ -60,8 +66,14 @@ include('conexion.php');
 			</div>
 			<figure class="full-width" style="height: 77px;">
 				<div class="navLateral-body-cl">
-					<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+				<figure>
+							<?php if(isset($_SESSION['imagen'])): ?>
+								<img src="<?php echo $_SESSION['imagen']; ?>" alt="Avatar" class="img-responsive">
+							<?php else: ?>
+								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+							<?php endif; ?>
 				</div>
+
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>
 					Nombre: <?php echo $_SESSION['nombre'] ?> <br>
@@ -266,6 +278,17 @@ include('conexion.php');
 						</div>
 					</a>
 				</li>
+
+				<li class="full-width">
+					<a href="./programas_academicos/index.php" class="full-width">
+						<div class="navLateral-body-cl">
+							<i class="zmdi zmdi-library"></i> <!-- Icono de Programas Académicos -->
+						</div>
+						<div class="navLateral-body-cr hide-on-tablet">
+							Programas Académicos
+						</div>
+					</a>
+				</li>
 			</ul>			
 
 			</ul>
@@ -343,6 +366,8 @@ include('conexion.php');
 							</div>
 						</a>
 					</li>
+
+					
 
 					<li class="full-width">
 						<a href="./change_pass/cambiarpass.php" class="full-width">
@@ -472,8 +497,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 												<span class="mdl-textfield__error">Invalid last name</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="fech_nacimiento_admin" name="fech_nacimiento_admin">
-												<label class="mdl-textfield__label" for="fech_nacimiento_admin">Fecha de nacimiento AA/MM/DD</label>
+												<input class="mdl-textfield__input" type="date" id="fech_nacimiento_admin" name="fech_nacimiento_admin">
+												<label class="mdl-textfield__label" for="fech_nacimiento_admin"></label>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneAdmin" name="phoneAdmin">

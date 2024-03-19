@@ -28,6 +28,9 @@ if ($filas == 0) {
         $_SESSION['nombre'] = $row->nombre_per;
         $_SESSION['rol'] = $row->nombre_tip;
         $_SESSION['tipo'] = $row->codigo_tip;
+        $ruta_imagen_usuario = $row->foto_per;
+        // Guardar la ubicación de la imagen en la sesión
+        $_SESSION['imagen'] = $ruta_imagen_usuario;
         header('Location: admin.php');
        
 
@@ -36,6 +39,9 @@ if ($filas == 0) {
         $_SESSION['nombre'] = $row->nombre_per;
         $_SESSION['rol'] = $row->nombre_tip;
         $_SESSION['tipo'] = $row->codigo_tip;
+        $ruta_imagen_usuario = $row->foto_per;
+        // Guardar la ubicación de la imagen en la sesión
+        $_SESSION['imagen'] = $ruta_imagen_usuario;
         header('Location: admin.php');
         
 
@@ -44,6 +50,7 @@ if ($filas == 0) {
         $_SESSION['nombre'] = $row->nombre_per;
         $_SESSION['rol'] = $row->nombre_tip;
         $_SESSION['tipo'] = $row->codigo_tip;
+        $_SESSION['imagen'] = $row->foto_per;
         header('Location: admin.php');
         
     }

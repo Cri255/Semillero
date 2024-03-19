@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Consulta SQL para recuperar los registros de la tabla 'semilleros'
-$sql_semilleros = "SELECT CONCAT(codigo_sem, ' - ', nombre_sem) AS codigo_nombre_sem FROM semilleros";
+$sql_semilleros = "SELECT CONCAT(nombre_sem) AS codigo_nombre_sem FROM semilleros";
 $result_semilleros = $conn->query($sql_semilleros);
 
 // Crear un array para almacenar los resultados
