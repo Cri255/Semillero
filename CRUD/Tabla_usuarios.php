@@ -2,7 +2,7 @@
 include("../conexion.php");
 
 // Operación READ (Leer registros)
-$sql = "SELECT documento_per, nombre_per, apellidos_per, fechanacimiento, email_per, telefono_per, foto_per, estado_per, password_per FROM personas";
+$sql = "SELECT documento_per, nombre_per, apellidos_per, fechanacimiento, email_per, telefono_per, estado_per, password_per FROM personas";
 $result = $conn->query($sql);
 
 ?>
@@ -20,9 +20,7 @@ $result = $conn->query($sql);
 
 <body>
     <h1>Usuarios Registrados</h1>
-    <a href="../admin.php" class="btn btn-primary">Página Principal</a>
     <br></br>
-
     <table>
         <tr>
             <th>Documento</th>
@@ -30,8 +28,7 @@ $result = $conn->query($sql);
             <th>Apellidos</th>
             <th>Fecha de Nacimiento</th>
             <th>Email</th>
-            <th>Teléfono</th>
-            <th>Foto</th>
+            <th>Teléfono</th>     
             <th>Estado</th>
             <th>Password</th>
             <th>Acciones</th>
@@ -46,7 +43,6 @@ $result = $conn->query($sql);
                 echo "<td>" . $row["fechanacimiento"] . "</td>";
                 echo "<td>" . $row["email_per"] . "</td>";
                 echo "<td>" . $row["telefono_per"] . "</td>";
-                echo "<td><img src='" . $row["foto_per"] . "' alt='Foto'></td>";
                 echo "<td>" . $row["estado_per"] . "</td>";
                 echo "<td>" . $row["password_per"] . "</td>";
                 echo '<td><button><a href="editar.php?id=' . $row["documento_per"] . '"><i class="fas fa-edit"></i></a></button> | <button><a href="eliminar.php?id=' . $row["documento_per"] . '"><i class="fas fa-trash-alt"></i></a></button></td>';
@@ -58,5 +54,6 @@ $result = $conn->query($sql);
         }
         ?>
     </table>
+    
 </body>
 </html>

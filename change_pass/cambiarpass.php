@@ -27,9 +27,6 @@
             <button type="submit" class="btn btn-primary" name="submit">Enviar</button>
         </form>
         <br></br>
-
-        <!-- Botón para redireccionar con Bootstrap -->
-        <a href="../admin.php" class="btn btn-primary">Ir a inicio</a>
     </div>
 
     <!-- Agregar el JavaScript de Bootstrap al final del cuerpo del documento -->

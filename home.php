@@ -42,9 +42,15 @@ include('conexion.php');
 					<li class="text-condensedLight noLink" ><small>Nombre: <?php echo $_SESSION['nombre'] ?>
 						</small></li>
 					<li class="noLink">
+
 						<figure>
-							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+							<?php if(isset($_SESSION['imagen'])): ?>
+								<img src="<?php echo $_SESSION['imagen']; ?>" alt="Avatar" class="img-responsive">
+							<?php else: ?>
+								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+							<?php endif; ?>
 						</figure>
+
 					</li>
 				</ul>
 			</nav>
@@ -59,7 +65,11 @@ include('conexion.php');
 			</div>
 			<figure class="full-width" style="height: 77px;">
 				<div class="navLateral-body-cl">
-					<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+					<?php if(isset($_SESSION['imagen'])): ?>
+								<img src="<?php echo $_SESSION['imagen']; ?>" alt="Avatar" class="img-responsive">
+							<?php else: ?>
+								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+							<?php endif; ?>
 				</div>
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>

@@ -55,7 +55,9 @@
             FROM personas
             INNER JOIN estudiantes_proyectos ON personas.documento_per = estudiantes_proyectos.documento_per
             INNER JOIN proyectos ON estudiantes_proyectos.codigo_pro = proyectos.codigo_pro
-            WHERE personas.codigo_tip = '" . $_SESSION['tipo'] . "'";    
+            WHERE personas.documento_per = '" . $_SESSION['documento_per'] . "'";    
+
+            echo "$sql";
 
             $result = $conn->query($sql);
 
@@ -84,7 +86,7 @@
 
         $conn->close();
         ?>
-        <a href="../admin.php" class="btn">Ir al inicio</a>
+        
     </div>
 </body>
 </html>

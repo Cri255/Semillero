@@ -1,0 +1,8 @@
+#iframeContenedor {
+    position: absolute;
+    top: 0;
+    left: 250px; /* El ancho de tu menú lateral */
+    width: calc(100% - 250px); /* El ancho de tu menú lateral */
+    height: 100%;
+    border: none;
+}

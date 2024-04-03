@@ -3,6 +3,7 @@ session_start();
 include('conexion.php');
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,6 +25,7 @@ include('conexion.php');
 	<script src="js/main.js" ></script>
 </head>
 <body>
+
     <!-- navBar -->
     <div class="full-width navBar">
         <div class="full-width navBar-options">
@@ -38,15 +40,13 @@ include('conexion.php');
                     </li>
                     <li class="text-condensedLight noLink" ><small>Nombre: <?php echo $_SESSION['nombre'] ?>
                         </small></li>
+                        
                     <li class="noLink">
-
-                    <figure class="full-width" style="height: 77px;">
-				<div class="navLateral-body-cl">
                 <figure>
 							<?php if(isset($_SESSION['imagen'])): ?>
 								<img src="<?php echo $_SESSION['imagen']; ?>" alt="Avatar" class="img-responsive">
 							<?php else: ?>
-								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+								<img src="./assets/img/avatar-female.png" alt="Avatar" class="img-responsive">
 							<?php endif; ?>
 						</figure>
 				</div>
@@ -79,7 +79,7 @@ include('conexion.php');
 							<?php if(isset($_SESSION['imagen'])): ?>
 								<img src="<?php echo $_SESSION['imagen']; ?>" alt="Avatar" class="img-responsive">
 							<?php else: ?>
-								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+								<img src="./assets/img/avatar-female.png" alt="Avatar" class="img-responsive">
 							<?php endif; ?>
 				</div>
                 </div>
@@ -295,192 +295,3 @@ include('conexion.php');
 
 <!----------------------------------------------------------------CRUD ESTUDIANTE---------------------------------------------------------------->
 
-// Procesar datos del formulario cuando se envíe
-<?php
-if ($_SESSION['tipo'] == 3) { // Número 3: Admin
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-       
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $cedula = $_POST['cedulaestu'];
-            $nombre = $_POST['Nameestu'];
-            $apellido = $_POST['LastNameestu'];
-            $fechanacimiento = $_POST['fech_nacimiento_estu'];
-            $telefono = $_POST['phoneestu'];
-            $foto = $_FILES['fileToUpload']['name']; 
-            $email = $_POST['emailestu'];
-            $estado = $_POST['estadoestu'];
-            $password = $_POST['passwordestu'];
-            $tipo_identificador = '1';
-			$codigo_semillero = ['semillero_estu'];
-
-        // Insertar datos en la base de datos
-        $sql = "INSERT INTO personas (documento_per, nombre_per, apellidos_per, fechanacimiento, telefono_per, foto_per, email_per, estado_per, password_per, codigo_tip, codigo_sem)
-        VALUES ('$cedula', '$nombre', '$apellido', '$fechanacimiento', '$telefono', '$foto', '$email', '$estado', '$password', '$tipo_identificador', '$codigo_semillero')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Registro de profesor exitoso";
-			
-            $target_dir = "./fotos_perfil/"; // Directorio donde se almacenará la imagen
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                // El archivo se ha subido correctamente, ahora inserta la ruta en la base de datos
-                $ruta_imagen = $target_file;
-
-                $sql_update = "UPDATE personas SET foto_per = '$ruta_imagen' WHERE documento_per = '$cedula'"; // O INSERT INTO si es un nuevo registro
-
-                if ($conn->query($sql_update) === TRUE) {
-                    echo "El archivo " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " ha sido subido y la ruta ha sido guardada en la base de datos.";
-                } else {
-                    echo "Hubo un error al guardar la ruta en la base de datos: " . $conn->error;
-                }
-            } else {
-                echo "Lo siento, hubo un error al subir el archivo.";
-            }
-        } else {
-            echo "Error en la inserción: " . $conn->error;
-        }
-    }
-}
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Formulario</title>
-</head>
-<body>
-    <section class="full-width pageContent">
-        <section class="full-width header-well">
-        
-        </section>
-        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-            <div class="mdl-tabs__tab-bar">
-                <a href="#tabNewAdmin" class="mdl-tabs__tab is-active">Agregar un nuevo estudiante</a>
-            </div>
-            <div class="mdl-tabs__panel is-active" id="tabNewAdmin">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-                        <div class="full-width panel mdl-shadow--2dp">
-                            <div class="full-width panel-tittle bg-primary text-center tittles">
-                                Nuevo Estudiante
-                            </div>
-
-                            <div class="full-width panel-content">
-                                <form method="post" enctype="multipart/form-data">
-                                    <div class="mdl-grid">
-                                        <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-                                            <h5 class="text-condensedLight">Información del Estudiante</h5>
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="cedulaestu" name="cedulaestu">
-                                                <label class="mdl-textfield__label" for="cedulaestu">Documento</label>
-                                                <span class="mdl-textfield__error">Número inválido</span>
-                                            </div>
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="Nameestu" name="Nameestu">
-                                                <label class="mdl-textfield__label" for="Nameestu">Nombre</label>
-                                                <span class="mdl-textfield__error">Nombre inválido</span>
-                                            </div>
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="LastNameestu" name="LastNameestu">
-                                                <label class="mdl-textfield__label" for="LastNameestu">Apellido</label>
-                                                <span class="mdl-textfield__error">Apellido inválido</span>
-                                            </div>
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="date" id="fech_nacimiento_estu" name="fech_nacimiento_estu">
-                                                <label class="mdl-textfield__label" for="fech_nacimiento_estu"></label>
-                                            </div>
-
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneestu" name="phoneestu">
-                                                <label class="mdl-textfield__label" for="phoneestu">Teléfono</label>
-                                                <span class="mdl-textfield__error">Número de teléfono inválido</span>
-                                            </div>
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="email" id="emailestu" name="emailestu">
-                                                <label class="mdl-textfield__label" for="emailestu">Correo Electrónico</label>
-                                                <span class="mdl-textfield__error">Correo electrónico inválido</span>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-                                            <h5 class="text-condensedLight">Detalles de la cuenta</h5>
-
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <label class="mdl-textfield__label" for="estadoestu">Estado</label>
-                                                <select class="mdl-textfield__input" id="estadoestu" name="estadoestu">
-                                                    <option value="Activo">Activo</option>
-                                                    <option value="Inactivo">Inactivo</option>
-                                                </select>
-                                                <span class="mdl-textfield__error">Estado inválido</span>
-                                            </div>
-
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="password" id="passwordestu" name="passwordestu">
-                                                <label class="mdl-textfield__label" for="passwordestu">Contraseña</label>
-                                                <span class="mdl-textfield__error">Contraseña inválida</span>
-                                            </div>
-
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <select class="mdl-textfield__input" id="semillero_estu" name="semillero_estu" required>
-                                                    <option value="">Seleccionar Semillero</option>
-                                                    <?php
-                                                    include('../conexion.php');
-
-                                                    // Consultar los semilleros para mostrar en la lista desplegable
-                                                    $query_semilleros = $conn->query("SELECT codigo_sem, nombre_sem FROM semilleros");
-
-                                                    if ($query_semilleros && $query_semilleros->num_rows > 0) {
-                                                        while ($semillero = $query_semilleros->fetch_assoc()) {
-                                                            echo "<option value='" . $semillero['codigo_sem'] . "'>" . $semillero['nombre_sem'] . "</option>";
-                                                        }
-                                                    } else {
-                                                        echo "<option value='' disabled>No hay semilleros disponibles</option>";
-                                                    }
-
-                                                    $conn->close();
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            
-                                            <style>
-
-                                                        body, html {
-                                                            height: 100%;
-                                                            margin: 0;
-                                                            display: flex;
-                                                            justify-content: center;
-                                                            align-items: center;
-                                                        }
-
-                                                        .container {
-                                                            text-align: center;
-                                                        }
-                                                    </style>
-                                                </head>
-                                                <body>
-                                                    <div class="container">
-                                                        <h3>Subir Foto de Perfil</h3>
-                                                        
-                                                        <input type="file" name="fileToUpload" id="fileToUpload">
-                                                        <input type="submit" value="Enviar" name="submit">
-                                                    </div>
-                                                </body>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
-        <?php
-          }  // Cierre de la etiqueta PHP
-        ?>
-    </section>
-</body>
-</html>

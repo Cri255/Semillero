@@ -1,7 +1,13 @@
 <?php
 include('../conexion.php');
 
-
+// Inicializar variables
+$titulo_pro = $estado_pro = $anio_pro = $mes_pro = $palabras_pro = "";
+$codigo_ciu = $duracion_pro = $codigo_tip_pro = $horassemanalider_pro = $resumen = "";
+$planteamientoproblema = $justificacion = $preguntainvestigacion = $marcoteorico = $estadoarte = "";
+$objetivogeneral = $objetivosespecificos = $metodologia = $cronograma = $resultadosproductos = "";
+$bibliografia = $presupuesto = $gastosprofesores = $gastosequipos = $gastossoftware = $gastosviajes = "";
+$gastosplanformacion = $ruta_archivo = "";
 
 // Verificar si se ha enviado un formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -34,13 +40,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gastosviajes = $_POST["gastosviajes"];
     $gastosplanformacion = $_POST["gastosplanformacion"];
 
-    // Procesar el archivo subido
-    $ruta_archivo = '/uploads'; // Variable para almacenar la ruta del archivo
-    if (isset($_FILES['archivo']) && $_FILES['archivo']['size'] > 0) {
-        $carpeta_destino = "uploads/"; // Directorio donde se almacenarán los archivos
-        $nombre_archivo = $_FILES['archivo']['name'];
-        $ruta_archivo = $carpeta_destino . $nombre_archivo;
-        move_uploaded_file($_FILES['archivo']['tmp_name'], $ruta_archivo);
+// Captura el título del proyecto ingresado por el usuario
+$titulo_pro = $_POST["titulo_pro"];
+
+// Procesar el archivo subido
+$ruta_archivo = '/uploads'; // Variable para almacenar la ruta del archivo
+if (isset($_FILES['archivo']) && $_FILES['archivo']['size'] > 0) {
+    $carpeta_destino = "uploads/"; // Directorio donde se almacenarán los archivos
+    $nombre_archivo = $titulo_pro . "_" . $_FILES['archivo']['name']; // Aquí concatenamos el título del proyecto con el nombre del archivo original
+    $ruta_archivo = $carpeta_destino . $nombre_archivo;
+    move_uploaded_file($_FILES['archivo']['tmp_name'], $ruta_archivo);
+}
+
     }
 
     // Variable para almacenar la ruta en la base de datos
@@ -82,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error en la conexión a la base de datos";
     }
-}
+
 ?>
 
 
