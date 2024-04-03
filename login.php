@@ -55,6 +55,4 @@ if ($filas == 0) {
         
     }
 }
-
-/*Semillero*/
 ?>

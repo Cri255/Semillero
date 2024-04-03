@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-03-2024 a las 05:08:59
+-- Tiempo de generación: 03-04-2024 a las 23:21:11
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 7.4.33
 
@@ -918,6 +918,7 @@ CREATE TABLE `estudiantes_proyectos` (
 --
 
 INSERT INTO `estudiantes_proyectos` (`ide_est_pro`, `codigo_pro`, `documento_per`, `rol_est_pro`, `horassemana`, `semestreacademico`, `promedio`, `mesessemillero`) VALUES
+(0, 4, '1097910189', 1, 15, 5, 4.2, 12),
 (852, 2, '123456789', 2, 33, 4, 4.1, 12),
 (134679, 1, '1097102912', 1, 15, 8, 4.4, 8);
 
@@ -990,10 +991,14 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`documento_per`, `nombre_per`, `apellidos_per`, `fechanacimiento`, `email_per`, `telefono_per`, `foto_per`, `estado_per`, `password_per`, `codigo_tip`, `codigo_sem`) VALUES
-('1097102912', 'Santiago', 'Barón', '2023-10-04', 'Santiago@gmail.com', '3215486719', '../fotos_perfil/Santiago.jpg', 'Activo', '543210', 2, 1),
-('1097910189', 'Cristian', 'Barón', '2004-05-06', 'Baronrodriguezcristian@gmail.com', '3134534867', '../fotos_perfil/Yo.png', 'Activo', '1234', 3, 1),
-('123456789', 'Yomira ', 'Jerez', '2003-05-08', 'dy.jerezojeda@unicienciabga.edu.co', '3212590507', '../fotos_perfil/Yomira.jpg', 'Activo', 'Y+*-810911', 2, 1),
-('91514447', 'Manuel', 'Barón', '2023-10-18', 'mebp32@hotmail.com', '311564892', '../fotos_perfil/Manuel.jpg', 'Activo', '810911', 1, 1);
+('1097102912', 'Santiago', 'Barón', '2023-10-04', 'Santiago@gmail.com', '3215486719', './fotos_perfil/Santiago.jpg', 'Activo', '543210', 2, 1),
+('1097910189', 'Cristian', 'Barón', '2004-05-06', 'Baronrodriguezcristian@gmail.com', '3134534867', './fotos_perfil/Yo.png', 'Activo', '1234', 3, 1),
+('123456789', 'Yomira ', 'Jerez', '2003-05-08', 'dy.jerezojeda@unicienciabga.edu.co', '3212590507', './fotos_perfil/Yomira.jpg', 'Activo', 'Y+*-810911', 2, 1),
+('37861662', 'Juan Carlos', 'Parra Mora', '2000-07-13', 'jc.parramora@gmail.com', '3165248961', './fotos_perfil/Santiago1.jpeg', 'Activo', 'J+*-810911', 2, 0),
+('741852963', 'Ana Luz', 'Garcia', '2001-06-15', 'Sm.ruedacastillo@unicienciabga.edu.co', '3124545314', './fotos_perfil/Ana.jpeg', 'Activo', 'Ana+*-810911', 3, 1),
+('794613258', 'Angie', 'Benavides', '2000-06-22', 'Angie@gmail.com', '3134534867', './fotos_perfil/Amparo.jpg', 'Activo', 'A+*-810911', 1, 0),
+('91514447', 'Manuel', 'Barón', '2023-10-18', 'mebp32@hotmail.com', '311564892', './fotos_perfil/Manuel.jpg', 'Activo', '810911', 1, 1),
+('987654321', 'Francisca ', 'Parada', '2004-01-14', 'Frapa@gmail.com', '3212590507', './fotos_perfil/Angie.jpg', 'Activo', 'F+*-810911', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -1058,7 +1063,8 @@ CREATE TABLE `proyectos` (
 
 INSERT INTO `proyectos` (`codigo_pro`, `tiutlo_pro`, `estado_pro`, `anio_pro`, `mes_pro`, `palabras_pro`, `codigo_ciu`, `duracion_pro`, `codigo_tip_pro`, `horassemanalider_pro`, `resumen`, `planteamientoproblema`, `justificacion`, `preguntainvestigacion`, `marcoteorico`, `estadoarte`, `objetivogeneral`, `objetivosespecificos`, `metodologia`, `cronograma`, `resultadosProductos`, `bibliografia`, `presupuesto`, `gastosprofesores`, `gastosequipos`, `gastossoftware`, `gastosviajes`, `gastosplanformacion`, `rutaarchivo_pro`) VALUES
 (1, 'sdsfdgdg', 'activo', 2022, 6, 'asfafsdf', 5001, 15, 255, 55, 'asdfsdaf', 'sdfasfadfs', 'fadfs', 'fdfsd', 'asfasdfdfdf', 'safsdf', 'fdafads', 'fsfdafaf', 'sdfdsfdsf', 'fsdf', 'fsadfs', 'fafas', 'fs', 'fasfasf', 'fafa', 'asdfasdf', 'sfdsdfsdf', 'dfsf', 'uploads/Taller Redes.pdf'),
-(2, 'ddd', 'activo', 2000, 1, 'sdfsff', 15238, 2, 360, 99, 'dsadfsadfd', 'asfafaf', 'dfasff', 'fdfaf', 'fafdsas', 'asff', 'dfafas', 'fasfafasd', 'fadff', 'dfafaf', 'dsfsf', 'safasf', 'fsdf', 'afd', 'adfafaf', 'fdadf', 'dfsfv', 'savaas', 'uploads/TALLER PARA ENTREGAR conf básic de un SW.pdf');
+(2, 'ddd', 'activo', 2000, 1, 'sdfsff', 15238, 2, 360, 99, 'dsadfsadfd', 'asfafaf', 'dfasff', 'fdfaf', 'fafdsas', 'asff', 'dfafas', 'fasfafasd', 'fadff', 'dfafaf', 'dsfsf', 'safasf', 'fsdf', 'afd', 'adfafaf', 'fdadf', 'dfsfv', 'savaas', 'uploads/TALLER PARA ENTREGAR conf básic de un SW.pdf'),
+(4, 'Proyecto 1', 'activo', 2024, 5, 'ergegrg', 5055, 48, 360, 55, 'ergewrgewrg', 'ergewrgrwgerger', 'ergrwge', 'rgewrgwergg', 'ergewrgewrgergerg', 'ewrgewrgerg', 'ergergerg', 'ergergergergrg', 'ergergerger', 'gergerwgergg', 'ergergergerg', 'ergergergerg', '1615', '453453', '43543', '4534535', '5434', '5453453', 'uploads/Parcial PICE III.pdf');
 
 -- --------------------------------------------------------
 
@@ -1216,7 +1222,7 @@ ALTER TABLE `tipoproyectos`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `codigo_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codigo_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
