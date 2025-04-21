@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Lista de Archivos</h1>
+        <h1>Asignar profesores a proyectos</h1>
         <form method="post" action="procesar_asignacion.php">
             <ul class="file-list">
             <?php
@@ -23,30 +23,31 @@
             // Verificar si el usuario es un administrador
             if ($_SESSION['tipo'] == 3) {
                 // Consultar los proyectos para mostrar en la lista
-                $query = $conn->query("SELECT codigo_pro, rutaarchivo_pro FROM proyectos");
+                $query = $conn->query("SELECT codigo_pro,tiutlo_pro, rutaarchivo_pro FROM proyectos");
 
                 if ($query && $query->num_rows > 0) {
                     while ($row = $query->fetch_assoc()) {
                         $codigo_pro = $row['codigo_pro'];
                         $rutaArchivo = $row['rutaarchivo_pro'];
                         $nombreArchivo = basename($rutaArchivo);
+                        $name = $row['tiutlo_pro'];
                         echo "<li class='file-link'>";
-                        echo "<a href='$rutaArchivo'><i class='fas fa-file'></i> $nombreArchivo</a>";
-                        echo "<div class='context-menu'>";
-                        echo "<form method='POST' action='procesar_asignacion.php'>";
-                        echo "<input type='hidden' name='codigo_pro' value='$codigo_pro'>";
-                        echo "<select name='documento_per'>";
-                        echo "<option value=''>Seleccionar Profesor</option>";
-                        $query_profesores = $conn->query("SELECT documento_per, nombre_per FROM personas WHERE codigo_tip = 2");
-                        if ($query_profesores && $query_profesores->num_rows > 0) {
-                            while ($profesor = $query_profesores->fetch_assoc()) {
-                                echo "<option value='" . $profesor['documento_per'] . "'>" . $profesor['nombre_per'] . "</option>";
-                            }
-                        }
-                        echo "</select>";
-                        echo "<button type='submit'>Asignar</button>";
-                        echo "</form>";
-                        echo "</div>";
+                            echo "<a ><i class='fas fa-file'></i> $name</a>";
+                            echo "<div class='context-menu'>";
+                                echo "<form method='POST' action='procesar_asignacion.php'>";
+                                    echo "<input type='hidden' name='codigo_pro' value='$codigo_pro'>";
+                                    echo "<select name='documento_per'>";
+                                        echo "<option value=''>Seleccionar Profesor</option>";
+                                        $query_profesores = $conn->query("SELECT * FROM personas WHERE codigo_tip = 2");
+                                        if ($query_profesores && $query_profesores->num_rows > 0) {
+                                            while ($profesor = $query_profesores->fetch_assoc()) {
+                                                echo "<option value='" . $profesor['id_per'] . "'>" . $profesor['nombre_per'].' '.$profesor['apellidos_per'] . "</option>";
+                                            }
+                                        }
+                                    echo "</select>";
+                                    echo "<button type='submit'>Asignar</button>";
+                                echo "</form>";
+                            echo "</div>";
                         echo "</li>";
                     }
                 } else {
@@ -60,9 +61,7 @@
             </ul>
         </form>
     </div>
-    <a href="../admin.php" class="btn">Ir al inicio</a>
-</body>
-</html>
+
 
     
     <!-- Script de Font Awesome -->

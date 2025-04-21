@@ -161,7 +161,7 @@ if ($archivos && $archivos->num_rows > 0) {
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $target_dir = "subir_archivos/uploads/";
+    $target_dir = "./subir_archivos/uploads/";
     $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

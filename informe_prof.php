@@ -64,7 +64,7 @@ if(isset($_POST['export'])) {
         /* Estilo para el botón */
         .blue-button {
             background-color: #007bff; /* Azul */
-            color: white;
+            color: black;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;

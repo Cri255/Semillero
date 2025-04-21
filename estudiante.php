@@ -220,26 +220,6 @@ include('conexion.php');
 			</a>
 			<ul class="full-width menu-principal sub-menu-options">
 				<li class="full-width">
-					<a href="./Ciudades/index_ciu.php" class="full-width">
-						<div class="navLateral-body-cl">
-							<i class="zmdi zmdi-pin-drop"></i> <!-- Icono de Ciudad -->
-						</div>
-						<div class="navLateral-body-cr hide-on-tablet">
-							Ciudades
-						</div>
-					</a>
-				</li>
-				<li class="full-width">
-					<a href="./Departamentos/Index_dep.php" class="full-width">
-						<div class="navLateral-body-cl">
-							<i class="zmdi zmdi-city"></i> <!-- Icono de Departamento -->
-						</div>
-						<div class="navLateral-body-cr hide-on-tablet">
-							Departamentos
-						</div>
-					</a>
-				</li>
-				<li class="full-width">
 					<a href="./Tipos_de_proyectos/Formulario.php" class="full-width">
 						<div class="navLateral-body-cl">
 							<i class="zmdi zmdi-folder"></i> <!-- Icono de Proyecto -->

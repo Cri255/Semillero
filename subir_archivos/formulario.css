@@ -5,6 +5,53 @@ label {
 
 
 .rounded-button {
-     border-radius: 20px;
+    border-radius: 20px;
  }
 
+#resumen {
+    width: 100%; /* Ancho del textarea al 100% */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ced4da; /* Borde del textarea */
+    box-sizing: border-box; /* Incluir borde y relleno en el tamaño total */
+}
+
+#planteamientoproblema {
+    width: 100%; /* Ancho del textarea al 100% */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ced4da; /* Borde del textarea */
+    box-sizing: border-box; /* Incluir borde y relleno en el tamaño total */
+}
+
+#justificacion {
+    width: 100%; /* Ancho del textarea al 100% */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ced4da; /* Borde del textarea */
+    box-sizing: border-box; /* Incluir borde y relleno en el tamaño total */
+}
+
+#estadoarte {
+    width: 100%; /* Ancho del textarea al 100% */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ced4da; /* Borde del textarea */
+    box-sizing: border-box; /* Incluir borde y relleno en el tamaño total */
+}
+
+#bibliografia {
+    width: 100%; /* Ancho del textarea al 100% */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ced4da; /* Borde del textarea */
+    box-sizing: border-box; /* Incluir borde y relleno en el tamaño total */
+}
+
+#metodologia {
+    width: 100%; /* Ancho del textarea al 100% */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ced4da; /* Borde del textarea */
+    box-sizing: border-box; /* Incluir borde y relleno en el tamaño total */
+}

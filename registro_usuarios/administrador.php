@@ -17,38 +17,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$codigo_semillero = '1';
 
 
-    // Insertar datos en la base de datos
-    $sql = "INSERT INTO personas (documento_per, nombre_per, apellidos_per, fechanacimiento, telefono_per, foto_per, email_per, estado_per, password_per, codigo_tip, codigo_sem )
-    VALUES ('$cedula', '$nombre', '$apellido', '$fechanacimiento', '$telefono', '$foto','$email','$estado', '$password', '$tipo_identificador', '$codigo_semillero')";
- // Insertar datos en la base de datos
- $sql = "INSERT INTO personas (documento_per, nombre_per, apellidos_per, fechanacimiento, telefono_per, foto_per, email_per, estado_per, password_per, codigo_tip, codigo_sem)
- VALUES ('$cedula', '$nombre', '$apellido', '$fechanacimiento', '$telefono', '$foto', '$email', '$estado', '$password', '$tipo_identificador', '$codigo_semillero')";
+// Insertar datos en la base de datos
+$sql = "INSERT INTO personas (documento_per, nombre_per, apellidos_per, fechanacimiento, telefono_per, foto_per, email_per, estado_per, password_per, codigo_tip, codigo_sem )
+VALUES ('$cedula', '$nombre', '$apellido', '$fechanacimiento', '$telefono', '$foto','$email','$estado', '$password', '$tipo_identificador', '$codigo_semillero')";
 
- if ($conn->query($sql) === TRUE) {
-	 echo "Registro Exitoso";
+if ($conn->query($sql)) {	 
 	 
-	 $target_dir = "../fotos_perfil/"; // Directorio donde se almacenará la imagen
-	 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-	 $uploadOk = 1;
-	 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $target_dir = "../fotos_perfil/"; // Directorio donde se almacenará la imagen
+    $target_dir_db = "./fotos_perfil/"; // Directorio para la ruta en la db
 
-	 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		 // El archivo se ha subido correctamente, ahora inserta la ruta en la base de datos
-		 $ruta_imagen = $target_file;
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-		 $sql_update = "UPDATE personas SET foto_per = '$ruta_imagen' WHERE documento_per = '$cedula'"; // O INSERT INTO si es un nuevo registro
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-		 if ($conn->query($sql_update) === TRUE) {
-			 echo "El archivo " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " ha sido subido y la ruta ha sido guardada en la base de datos.";
-		 } else {
-			 echo "Hubo un error al guardar la ruta en la base de datos: " . $conn->error;
-		 }
-	 } else {
-		 echo "Lo siento, hubo un error al subir el archivo.";
-	 }
- } else {
-	 echo "Error en la inserción: " . $conn->error;
- }
+        // El archivo se ha subido correctamente, ahora inserta la ruta en la base de datos
+        $ruta_imagen = $target_dir_db . basename($_FILES["fileToUpload"]["name"]);
+
+        $sql_update = "UPDATE personas SET foto_per = '$ruta_imagen' WHERE documento_per = '$cedula'"; // O INSERT INTO si es un nuevo registro
+
+        if ($conn->query($sql_update) === TRUE) {
+            echo "Registro Exitoso";
+            //echo "El archivo " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " ha sido subido y la ruta ha sido guardada en la base de datos.";
+        } else {
+            echo "Hubo un error al guardar la ruta en la base de datos: " . $conn->error;
+        }
+    } else {
+        echo "Lo siento, hubo un error al subir el archivo.";
+    }
+} else {
+    echo "Error en la inserción: " . $conn->error;
+}
+
+
 }
 ?>
 

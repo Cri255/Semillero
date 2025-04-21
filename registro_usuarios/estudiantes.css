@@ -1,9 +1,7 @@
 body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
-    margin: 20px;
-    margin-top: 200px; /* Margen superior añadido */
-    margin-left: 350px;
+    
 }
 
 .card {

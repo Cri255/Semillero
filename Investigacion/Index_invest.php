@@ -57,7 +57,6 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
     <title>Registro de Líneas</title>
     <style>
-        /* Aquí puedes incluir los estilos CSS si los necesitas */
     </style>
 </head>
 <body>
@@ -96,9 +95,6 @@ $conn->close();
             
             <input type="submit" value="Registrar">
         </form>
-
-        <!-- Botón para volver a la página de inicio -->
-        <button type="button" onclick="window.history.back()">Volver</button>
     </div>
 </body>
 </html>

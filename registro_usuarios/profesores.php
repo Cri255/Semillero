@@ -21,17 +21,19 @@ include("../conexion.php");
         $sql = "INSERT INTO personas (documento_per, nombre_per, apellidos_per, fechanacimiento, telefono_per, foto_per, email_per, estado_per, password_per, codigo_tip, codigo_sem)
         VALUES ('$cedula', '$nombre', '$apellido', '$fechanacimiento', '$telefono', '$foto', '$email', '$estado', '$password', '$tipo_identificador', '$codigo_semillero')";
 
-        if ($conn->query($sql) === TRUE) {
+        if ($conn->query($sql)) {
             echo "Registro Exitoso";
 
             $target_dir = "../fotos_perfil/"; // Directorio donde se almacenará la imagen
+            $target_dir_db = "./fotos_perfil/"; // Directorio para la ruta en la db
+
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 // El archivo se ha subido correctamente, ahora inserta la ruta en la base de datos
-                $ruta_imagen = $target_file;
+                $ruta_imagen = $target_dir_db . basename($_FILES["fileToUpload"]["name"]);
 
                 $sql_update = "UPDATE personas SET foto_per = '$ruta_imagen' WHERE documento_per = '$cedula'"; // O INSERT INTO si es un nuevo registro
 
@@ -55,8 +57,9 @@ include("../conexion.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Nuevo Profesor</title>
-    <link rel="stylesheet" href="profesores.css">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="profesores.css">
 </head>
 <body>
     <div class="container container-form">
@@ -93,7 +96,7 @@ include("../conexion.php");
                                     </div>
                                     <div class="form-group">
                                         <label for="emailprof">Correo Electrónico</label>
-                                        <input class="form-control" type="email" id="emailprof" name="emailprof"pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Por favor, introduce una dirección de correo electrónico válida" required>>
+                                        <input class="form-control" type="email" id="emailprof" name="emailprof"pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Por favor, introduce una dirección de correo electrónico válida" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
