@@ -83,7 +83,6 @@ if ($cod_pro) {
     <h3>Mi tutor:</h3>
     
     <?php if ($nom_profesor): ?>
-<<<<<<< HEAD
     <div class="card">
         <!-- Imagen del profesor -->
         <img src="<?php echo $foto_profesor ? str_replace('./', '../', htmlspecialchars($foto_profesor)) : '../img/default.png'; ?>" alt="Foto del profesor">
@@ -103,35 +102,5 @@ if ($cod_pro) {
 <?php else: ?>
     <h3>No se te ha asignado aún un tutor para tu proyecto</h3>
 <?php endif; ?>
-=======
-        <div class="card">
-            <!-- Imagen del profesor -->
-            <img src="<?php echo htmlspecialchars($foto_profesor); ?>" alt="Foto del profesor">
-            
-            <!-- Nombre y apellidos del profesor -->
-            <h3><?php echo htmlspecialchars($nom_profesor); ?></h3>
-            
-            <!-- Título del profesor -->
-            <p>Profesor</p>
-            <p>Universidad Uniciencia</p>
-
-            <!-- Habilidades del profesor -->
-            <div class="skills">
-                <span>UI</span>
-                <span>UX</span>
-                <span>Java</span>
-                <span>+3</span>
-            </div>
-
-            <!-- Información del profesor -->
-            <p>Contacto: <?php echo htmlspecialchars($email_profesor); ?></p>
-            <p>Teléfono: <?php echo htmlspecialchars($telefono_profesor); ?></p>
-
-            <button class="profile-btn">Ver perfil</button>
-        </div>
-    <?php else: ?>
-        <h3>No se te ha asignado aún un tutor para tu proyecto</h3>
-    <?php endif; ?>
->>>>>>> b677339b38163076ab689b7c218f5fa2dde71470
 </body>
 </html>
