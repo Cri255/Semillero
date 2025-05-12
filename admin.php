@@ -275,6 +275,7 @@ include('conexion.php');
                             </a>
                         </li>
                     </ul>
+<<<<<<< HEAD
 
                     <ul class="full-width list-unstyle menu-principal">
 
@@ -290,6 +291,8 @@ include('conexion.php');
                         </li>
                     </ul>
                     
+=======
+>>>>>>> b677339b38163076ab689b7c218f5fa2dde71470
                 </nav>		
                 <?php
                 }
@@ -325,6 +328,7 @@ include('conexion.php');
                             </a>
                         </li>
                         <li>
+<<<<<<< HEAD
                             <a href="#" onclick="cargarPagina('./Proyectos/mi_proyecto.php'); return false;" class="menu-link">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa fa-folder"></i>
@@ -335,6 +339,8 @@ include('conexion.php');
                             </a>
                         </li>
                         <li>
+=======
+>>>>>>> b677339b38163076ab689b7c218f5fa2dde71470
                             <a href="#" onclick="cargarPagina('./Estudiante/mi_tutor.php'); return false;" class="menu-link">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-chalkboard-teacher"></i>
@@ -402,6 +408,10 @@ include('conexion.php');
                 }
                 ?>		
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b677339b38163076ab689b7c218f5fa2dde71470
         </section>
         <!-- pageContent -->
 

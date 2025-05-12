@@ -15,6 +15,7 @@ include('../conexion.php');
             if ($conn->query($sql) === TRUE) {
                 echo "Asignación exitosa";
             }            
+<<<<<<< HEAD
         }
     }
 } else {
@@ -73,6 +74,8 @@ if ($_SESSION['tipo'] == 3) {
             } else {
                 echo "Error al guardar: " . $conn->error;
             }
+=======
+>>>>>>> b677339b38163076ab689b7c218f5fa2dde71470
         }
     }
 } else {

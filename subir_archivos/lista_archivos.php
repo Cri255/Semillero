@@ -22,8 +22,13 @@
             include('../conexion.php');
 
             if ($_SESSION['tipo'] == 3) {
+<<<<<<< HEAD
                 // Lista de proyectos SIN asignar
                 $query = $conn->query("SELECT * FROM proyectos WHERE codigo_pro NOT IN (SELECT fk_id_proyecto FROM profesores_proyectos)");
+=======
+                // Consultar los proyectos para mostrar en la lista
+                $query = $conn->query("SELECT codigo_pro,tiutlo_pro, rutaarchivo_pro FROM proyectos");
+>>>>>>> b677339b38163076ab689b7c218f5fa2dde71470
 
                 if ($query && $query->num_rows > 0) {
                     while ($row = $query->fetch_assoc()) {
@@ -31,9 +36,14 @@
                         $rutaArchivo = $row['rutaarchivo_pro'];
                         $nombreArchivo = basename($rutaArchivo);
                         $name = $row['tiutlo_pro'];
+<<<<<<< HEAD
 
                         echo "<li class='file-link'>";
                             echo "<a><i class='fas fa-file'></i> $name</a>";
+=======
+                        echo "<li class='file-link'>";
+                            echo "<a ><i class='fas fa-file'></i> $name</a>";
+>>>>>>> b677339b38163076ab689b7c218f5fa2dde71470
                             echo "<div class='context-menu'>";
                                 echo "<form method='POST' action='procesar_asignacion.php'>";
                                     echo "<input type='hidden' name='codigo_pro' value='$codigo_pro'>";
@@ -62,6 +72,7 @@
         </form>
     </div>
 
+<<<<<<< HEAD
     <!-- NUEVA SECCIÓN: Proyectos YA ASIGNADOS -->
     <div class="container" style="margin-top: 30px;">
         <h2>Proyectos ya asignados</h2>
@@ -102,6 +113,8 @@
         ?>
         </ul>
     </div>
+=======
+>>>>>>> b677339b38163076ab689b7c218f5fa2dde71470
 
     
     <!-- Script de Font Awesome -->
