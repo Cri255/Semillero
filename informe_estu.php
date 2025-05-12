@@ -64,7 +64,7 @@ if(isset($_POST['export_students'])) {
         /* Estilo para el botón */
         .blue-button {
             background-color: #007bff; /* Azul */
-            color: white;
+            color: black;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -74,6 +74,7 @@ if(isset($_POST['export_students'])) {
 </head>
 <body>
    <!-- Clase 'blue-button' añadida al botón -->
+    </center>
    <button type="submit" name="export" class="blue-button">Exportar estudiantes</button>
     </form>
 </body>

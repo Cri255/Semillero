@@ -89,8 +89,6 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
         </select><br>
         Contraseña: <input type="password" name="password" value="<?php echo $row['password_per']; ?>"><br>
         <input type="submit" name="submit" value="Actualizar">
-        <br></br>
-        <a href="Tabla_usuarios.php" class="btn">Ir a Inicio</a>
 
     </form>
 </body>

@@ -4,9 +4,7 @@ $username = "root";
 $password = "";
 $dbname = "db_semillero_sinergy";
 
-
-$conn = new mysqli('localhost', 'root','','db_semillero_sinergy',3307);
-
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);

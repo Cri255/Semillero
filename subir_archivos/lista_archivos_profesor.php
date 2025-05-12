@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archivos Asignados</title>
+    <title>Proyectos Asignados</title>
     <!-- Enlace a Font Awesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            
         }
         .file-list {
             list-style: none;
@@ -42,7 +42,9 @@
 </head>
 <body>
     <div class="container">
+        <h2>Listado de proyectos</h2>
         <?php
+
         session_start();
         include('../conexion.php');
 
@@ -51,13 +53,23 @@
             //$documento_per = $_SESSION['documento_per'];
 
             // Realizar la consulta SQL
-            $sql = "SELECT personas.nombre_per, proyectos.rutaarchivo_pro
-            FROM personas
-            INNER JOIN estudiantes_proyectos ON personas.documento_per = estudiantes_proyectos.documento_per
-            INNER JOIN proyectos ON estudiantes_proyectos.codigo_pro = proyectos.codigo_pro
-            WHERE personas.documento_per = '" . $_SESSION['documento_per'] . "'";    
+            // $sql = "SELECT personas.nombre_per, proyectos.rutaarchivo_pro
+            // FROM personas
+            // INNER JOIN estudiantes_proyectos ON personas.documento_per = estudiantes_proyectos.documento_per
+            // INNER JOIN proyectos ON estudiantes_proyectos.codigo_pro = proyectos.codigo_pro
+            // WHERE personas.documento_per = '" . $_SESSION['documento_per'] . "'"; 
+            
+            $sql = "
+                SELECT 
+                    p.nombre_per,
+                    prof_pro.fk_id_proyecto,
+                    pro.rutaarchivo_pro
+                FROM personas p 
+                INNER JOIN profesores_proyectos prof_pro ON prof_pro.fk_id_profesor = p.id_per
+                INNER JOIN proyectos pro ON pro.codigo_pro = prof_pro.fk_id_proyecto 
+                WHERE p.id_per = ".$_SESSION['id_per']."";
 
-            echo "$sql";
+            //echo "$sql";
 
             $result = $conn->query($sql);
 
@@ -67,10 +79,12 @@
                     // Obtener el nombre del archivo de la ruta
                     $rutaArchivo = $row['rutaarchivo_pro'];
                     $nombreArchivo = basename($rutaArchivo);
+                    $idProyecto = $row['fk_id_proyecto'];
 
                     // Generar enlaces a los archivos asignados y mostrarlos
                     echo "<li class='file-link'>";
                     echo "<a href='$rutaArchivo'><i class='fas fa-file'></i> $nombreArchivo</a>";
+                    echo "<br><a href='conversacion.php?id_proyecto=$idProyecto' class='btn-conversacion'><i class='fas fa-comments'></i> Ver conversación</a>";
                     echo "</li>";
                 }
                 echo "</ul>";

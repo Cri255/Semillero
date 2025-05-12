@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-04-2024 a las 23:21:11
+-- Tiempo de generación: 14-04-2025 a las 03:28:26
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 7.4.33
 
@@ -905,6 +905,7 @@ INSERT INTO `departamentos` (`codigo_dep`, `nombre_dep`) VALUES
 CREATE TABLE `estudiantes_proyectos` (
   `ide_est_pro` int(11) NOT NULL,
   `codigo_pro` int(11) DEFAULT NULL,
+  `id_per` int(11) NOT NULL,
   `documento_per` varchar(15) DEFAULT NULL,
   `rol_est_pro` int(11) DEFAULT NULL,
   `horassemana` int(11) DEFAULT NULL,
@@ -917,10 +918,8 @@ CREATE TABLE `estudiantes_proyectos` (
 -- Volcado de datos para la tabla `estudiantes_proyectos`
 --
 
-INSERT INTO `estudiantes_proyectos` (`ide_est_pro`, `codigo_pro`, `documento_per`, `rol_est_pro`, `horassemana`, `semestreacademico`, `promedio`, `mesessemillero`) VALUES
-(0, 4, '1097910189', 1, 15, 5, 4.2, 12),
-(852, 2, '123456789', 2, 33, 4, 4.1, 12),
-(134679, 1, '1097102912', 1, 15, 8, 4.4, 8);
+INSERT INTO `estudiantes_proyectos` (`ide_est_pro`, `codigo_pro`, `id_per`, `documento_per`, `rol_est_pro`, `horassemana`, `semestreacademico`, `promedio`, `mesessemillero`) VALUES
+(134680, 18, 15, '91514447', 0, 15, 5, 4.2, 12);
 
 -- --------------------------------------------------------
 
@@ -973,6 +972,7 @@ CREATE TABLE `permisos` (
 --
 
 CREATE TABLE `personas` (
+  `id_per` int(11) NOT NULL,
   `documento_per` varchar(15) NOT NULL,
   `nombre_per` varchar(30) DEFAULT NULL,
   `apellidos_per` varchar(30) DEFAULT NULL,
@@ -990,15 +990,12 @@ CREATE TABLE `personas` (
 -- Volcado de datos para la tabla `personas`
 --
 
-INSERT INTO `personas` (`documento_per`, `nombre_per`, `apellidos_per`, `fechanacimiento`, `email_per`, `telefono_per`, `foto_per`, `estado_per`, `password_per`, `codigo_tip`, `codigo_sem`) VALUES
-('1097102912', 'Santiago', 'Barón', '2023-10-04', 'Santiago@gmail.com', '3215486719', './fotos_perfil/Santiago.jpg', 'Activo', '543210', 2, 1),
-('1097910189', 'Cristian', 'Barón', '2004-05-06', 'Baronrodriguezcristian@gmail.com', '3134534867', './fotos_perfil/Yo.png', 'Activo', '1234', 3, 1),
-('123456789', 'Yomira ', 'Jerez', '2003-05-08', 'dy.jerezojeda@unicienciabga.edu.co', '3212590507', './fotos_perfil/Yomira.jpg', 'Activo', 'Y+*-810911', 2, 1),
-('37861662', 'Juan Carlos', 'Parra Mora', '2000-07-13', 'jc.parramora@gmail.com', '3165248961', './fotos_perfil/Santiago1.jpeg', 'Activo', 'J+*-810911', 2, 0),
-('741852963', 'Ana Luz', 'Garcia', '2001-06-15', 'Sm.ruedacastillo@unicienciabga.edu.co', '3124545314', './fotos_perfil/Ana.jpeg', 'Activo', 'Ana+*-810911', 3, 1),
-('794613258', 'Angie', 'Benavides', '2000-06-22', 'Angie@gmail.com', '3134534867', './fotos_perfil/Amparo.jpg', 'Activo', 'A+*-810911', 1, 0),
-('91514447', 'Manuel', 'Barón', '2023-10-18', 'mebp32@hotmail.com', '311564892', './fotos_perfil/Manuel.jpg', 'Activo', '810911', 1, 1),
-('987654321', 'Francisca ', 'Parada', '2004-01-14', 'Frapa@gmail.com', '3212590507', './fotos_perfil/Angie.jpg', 'Activo', 'F+*-810911', 2, 1);
+INSERT INTO `personas` (`id_per`, `documento_per`, `nombre_per`, `apellidos_per`, `fechanacimiento`, `email_per`, `telefono_per`, `foto_per`, `estado_per`, `password_per`, `codigo_tip`, `codigo_sem`) VALUES
+(9, '1097102912', 'Santiago', 'Barón', '2023-10-04', 'Santiago@gmail.com', '3215486719', './fotos_perfil/Santiago.jpg', 'Inactivo', '543210', 2, 2),
+(10, '1097910189', 'Cristian', 'Barón', '2004-05-06', 'Baronrodriguezcristian@gmail.com', '3134534867', './fotos_perfil/Yo.png', 'Activo', '1234', 3, 2),
+(11, '123456789', 'Yomira ', 'Jerez', '2003-05-08', 'dy.jerezojeda@unicienciabga.edu.co', '3212590507', './fotos_perfil/Ana.jpeg', 'Activo', 'Y+*-810911', 2, 2),
+(15, '91514447', 'Manuel', 'Barón', '2023-10-18', 'mebp32@hotmail.com', '311564892', './fotos_perfil/Manuel.jpg', 'Activo', '810911', 1, 2),
+(18, '63327090', 'Amparo ', 'Rueda', '2025-04-11', 'Amparo.rueda@gmail.com', '3178339612', './fotos_perfil/Amparo.jpg', 'Activo', 'Amparo+123', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -1016,8 +1013,8 @@ CREATE TABLE `programas` (
 --
 
 INSERT INTO `programas` (`codigo_pro`, `nombre_pro`) VALUES
-(0, 'Derecho Institucional'),
-(8888, 'Ingenieria de Sistemas');
+(1, 'Derecho Institucional'),
+(2, 'Ingenieria de Sistemas');
 
 -- --------------------------------------------------------
 
@@ -1062,9 +1059,28 @@ CREATE TABLE `proyectos` (
 --
 
 INSERT INTO `proyectos` (`codigo_pro`, `tiutlo_pro`, `estado_pro`, `anio_pro`, `mes_pro`, `palabras_pro`, `codigo_ciu`, `duracion_pro`, `codigo_tip_pro`, `horassemanalider_pro`, `resumen`, `planteamientoproblema`, `justificacion`, `preguntainvestigacion`, `marcoteorico`, `estadoarte`, `objetivogeneral`, `objetivosespecificos`, `metodologia`, `cronograma`, `resultadosProductos`, `bibliografia`, `presupuesto`, `gastosprofesores`, `gastosequipos`, `gastossoftware`, `gastosviajes`, `gastosplanformacion`, `rutaarchivo_pro`) VALUES
-(1, 'sdsfdgdg', 'activo', 2022, 6, 'asfafsdf', 5001, 15, 255, 55, 'asdfsdaf', 'sdfasfadfs', 'fadfs', 'fdfsd', 'asfasdfdfdf', 'safsdf', 'fdafads', 'fsfdafaf', 'sdfdsfdsf', 'fsdf', 'fsadfs', 'fafas', 'fs', 'fasfasf', 'fafa', 'asdfasdf', 'sfdsdfsdf', 'dfsf', 'uploads/Taller Redes.pdf'),
-(2, 'ddd', 'activo', 2000, 1, 'sdfsff', 15238, 2, 360, 99, 'dsadfsadfd', 'asfafaf', 'dfasff', 'fdfaf', 'fafdsas', 'asff', 'dfafas', 'fasfafasd', 'fadff', 'dfafaf', 'dsfsf', 'safasf', 'fsdf', 'afd', 'adfafaf', 'fdadf', 'dfsfv', 'savaas', 'uploads/TALLER PARA ENTREGAR conf básic de un SW.pdf'),
-(4, 'Proyecto 1', 'activo', 2024, 5, 'ergegrg', 5055, 48, 360, 55, 'ergewrgewrg', 'ergewrgrwgerger', 'ergrwge', 'rgewrgwergg', 'ergewrgewrgergerg', 'ewrgewrgerg', 'ergergerg', 'ergergergergrg', 'ergergerger', 'gergerwgergg', 'ergergergerg', 'ergergergerg', '1615', '453453', '43543', '4534535', '5434', '5453453', 'uploads/Parcial PICE III.pdf');
+(18, 'Moléculas funcionales y nanotubos funcionalizados', 'activo', 2025, 2, 'Magnetisme nuclear; Magnetismo nuclear; Nuclear magnetism; Compostos de coordinació; Compuestos de coordinación; Coordination compounds; Nanotubs; Nan', 11001, 6, 360, 12, 'En esta tesis doctoral se han llevado a cabo diferentes estudios dentro del ámbito del magnetismo molecular y la funcionalización de nanotubos de carbono de pared sencilla (SWNT). El magnetismo molecular engloba un amplio abanico de sistemas en función de su comportamiento magnético y de la funcionalidad que dicho comportamiento conlleve, lo que será de gran interés desde el punto de vista tecnológico. Entre estos sistemas cabe destacar los imanes unimoleculares (SMM) y los refrigerantes magnéticos moleculares. Por otro lado, los SWNT y su interacción con otras moléculas han atraído la atención de muchos grupos de investigación durante los últimos años debido a su posible aplicación en elect', 'A pesar de los avances en la nanotecnología, aún existen limitaciones significativas en la funcionalización efectiva de nanotubos de carbono con moléculas funcionales específicas, lo cual restringe su aplicabilidad en áreas como la medicina, sensores químicos, electrónica molecular y almacenamiento de energía. La escasa solubilidad de los nanotubos en medios acuosos y orgánicos, la baja selectividad en las interacciones con moléculas blanco y la dificultad para controlar la orientación y densidad de las moléculas funcionales son algunos de los principales retos. Esto impide aprovechar completamente las propiedades excepcionales de los nanotubos funcionalizados en sistemas reales, lo que plantea la necesidad de explorar nuevos métodos de funcionalización, caracterización y aplicaciones prácticas de estos nanomateriales.', 'La funcionalización de nanotubos con moléculas específicas permite mejorar sus propiedades químicas y físicas, ampliando su aplicabilidad en campos como la biomedicina, la electrónica y los sensores. Estudiar nuevas estrategias de funcionalización es clave para superar las limitaciones actuales y aprovechar al máximo el potencial de estos nanomateriales en el desarrollo de tecnologías avanzadas.', '¿Cómo influye el tipo de molécula funcional utilizada en las propiedades físico-químicas y la eficiencia de aplicación de nanotubos de carbono funcionalizados en sistemas tecnológicos o biomédicos?', 'Los nanotubos de carbono (NTC) son estructuras cilíndricas formadas por láminas de grafeno enrolladas, conocidas por su alta conductividad eléctrica, resistencia mecánica y estabilidad térmica. Sin embargo, su escasa solubilidad y baja reactividad química limitan su uso en aplicaciones prácticas. Para superar estas barreras, se recurre a la funcionalización, un proceso mediante el cual se modifican químicamente los nanotubos para incorporar moléculas funcionales que mejoran su compatibilidad y desempeño en distintos entornos.\r\n\r\nExisten dos tipos principales de funcionalización: covalente y no covalente. La funcionalización covalente implica la formación de enlaces químicos entre las moléculas funcionales y la superficie del nanotubo, lo cual puede alterar su estructura pero proporciona una unión fuerte y estable. Por otro lado, la funcionalización no covalente preserva la estructura original del NTC y se basa en interacciones físicas como fuerzas de Van der Waals o apilamiento π-π.\r\n', 'En los últimos años, diversos estudios han explorado la funcionalización de nanotubos de carbono para mejorar su compatibilidad en medios biológicos y su integración en dispositivos tecnológicos. Investigaciones como las de Bianco et al. (2011) han demostrado el uso de nanotubos funcionalizados para la liberación dirigida de fármacos, mostrando alta eficiencia en sistemas terapéuticos. Por otro lado, Chen et al. (2016) aplicaron moléculas funcionales específicas para convertir los nanotubos en sensores químicos sensibles a gases y biomarcadores.\r\n\r\nAvances más recientes se enfocan en técnicas de funcionalización más precisas y sostenibles, como el uso de biomoléculas y procesos de química verde. Sin embargo, persisten desafíos en cuanto a la reproducibilidad, estabilidad y control del grado de funcionalización, lo cual sigue siendo objeto de investigación activa a nivel global.', 'Investigar y analizar el efecto de la funcionalización de nanotubos de carbono con diferentes moléculas funcionales sobre sus propiedades físico-químicas, con el fin de evaluar su potencial en aplicac', 'Identificar los principales métodos de funcionalización covalente y no covalente aplicados a nanotubos de carbono.  Caracterizar las propiedades estructurales y fisicoquímicas de nanotubos funcionalizados con diferentes moléculas.  Evaluar el impacto de la funcionalización en la solubilidad, estabilidad y reactividad de los nanotubos.', 'La investigación se desarrollará bajo un enfoque experimental y descriptivo, dividida en las siguientes etapas:\r\n\r\nRevisión bibliográfica: Se recopilará y analizará información científica actualizada sobre nanotubos de carbono, métodos de funcionalización y aplicaciones recientes, utilizando bases de datos académicas como Scopus, ScienceDirect y Google Scholar.\r\n\r\nSelección de materiales: Se elegirá un tipo de nanotubo de carbono (de pared simple o múltiple) y diversas moléculas funcionales según la aplicación objetivo.\r\n\r\nFuncionalización de los nanotubos: Se aplicarán métodos covalentes y/o no covalentes para incorporar las moléculas seleccionadas a los nanotubos, siguiendo protocolos estandarizados en la literatura.\r\n\r\nCaracterización de materiales: Se utilizarán técnicas como espectroscopía FTIR, Raman, microscopía electrónica (SEM/TEM) y análisis térmico (TGA/DSC) para evaluar la eficacia de la funcionalización y los cambios en las propiedades de los nanotubos.\r\n\r\nEvaluación de d', '1 - 10 de abril: Revisión bibliográfica sobre nanotubos de carbono y moléculas funcionales.  11 - 15 de abril: Planteamiento del problema, objetivos y justificación.  16 - 25 de abril: Diseño detallado de la metodología experimental.  26 - 30 de abril: Selección de materiales y planificación del trabajo experimental.  1 - 10 de mayo: Preparación del laboratorio y adquisición de reactivos.  11 - 25 de mayo: Ejecución del proceso de funcionalización de los nanotubos.  26 - 31 de mayo: Inicio de caracterización preliminar (FTIR, SEM, etc.).  1 - 15 de junio: Continuación de la caracterización de los nanotubos funcionalizados.  16 - 25 de junio: Pruebas de aplicación (ej. sensores, liberación de fármacos, etc.).  26 - 30 de junio: Recolección de datos y organización de resultados.', 'Obtención exitosa de nanotubos funcionalizados mediante técnicas covalentes o no covalentes, conservando su integridad estructural.  Mejora en las propiedades físico-químicas de los nanotubos, como solubilidad, dispersión y estabilidad en medios líquidos, gracias a la incorporación de moléculas funcionales.  Verificación por caracterización instrumental (espectroscopía FTIR, Raman, SEM, etc.) de la presencia de grupos funcionales en la superficie de los nanotubos.  Demostración del desempeño mejorado en la aplicación seleccionada (por ejemplo, mayor sensibilidad en sensores o mejor transporte en liberación de fármacos).', 'Hirsch, A. (2002). Functionalization of single-walled carbon nanotubes. Accounts of Chemical Research, 35(10), 1036–1044. https://doi.org/10.1021/ar010144q\r\n\r\nTasis, D., Tagmatarchis, N., Bianco, A., & Prato, M. (2006). Chemistry of carbon nanotubes. Chemical Reviews, 106(3), 1105–1136. https://doi.org/10.1021/cr050569o\r\n\r\nBianco, A., Kostarelos, K., & Prato, M. (2005). Applications of carbon nanotubes in drug delivery. Current Opinion in Chemical Biology, 9(6), 674–679. https://doi.org/10.1016/j.cbpa.2005.10.005\r\n\r\nBussy, C., Ali-Boucetta, H., & Kostarelos, K. (2013). Safety considerations for the use of carbon nanotubes in humans. Nanomedicine, 8(6), 775–779. https://doi.org/10.2217/nnm.13.65\r\n\r\nMonthioux, M., & Kuznetsov, V. L. (2006). Who should be given the credit for the discovery of carbon nanotubes?. Carbon, 44(9), 1621–1623. https://doi.org/10.1016/j.carbon.2006.03.019\r\n\r\nAjayan, P. M., & Tour, J. M. (2007). Materials science: nanotube composites. Nature, 447(7148), 1066–1068', '60000000', '5000000', '40000000', '12000000', '2000000', '1000000', 'uploads/Moléculas funcionales y nanotubos funcionalizados.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proyectos_profesor`
+--
+
+CREATE TABLE `proyectos_profesor` (
+  `id` int(11) NOT NULL,
+  `id_profesor` int(11) NOT NULL,
+  `id_proyecto` int(11) NOT NULL,
+  `creation` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proyectos_profesor`
+--
+
+INSERT INTO `proyectos_profesor` (`id`, `id_profesor`, `id_proyecto`, `creation`) VALUES
+(2, 0, 1, '2024-09-25 05:26:02'),
+(3, 11, 1, '2024-09-25 05:28:58');
 
 -- --------------------------------------------------------
 
@@ -1085,8 +1101,8 @@ CREATE TABLE `semilleros` (
 --
 
 INSERT INTO `semilleros` (`codigo_sem`, `nombre_sem`, `fechacreacion_sem`, `estado_sem`, `codigo_pro`) VALUES
-(0, 'Cimed', '2018-10-05', 'Activo', 0),
-(1, 'Sinergy', '2013-06-05', 'Activo', 8888);
+(1, 'Cimed', '2018-10-05', 'Activo', 1),
+(2, 'Sinergy', '2013-06-05', 'Activo', 2);
 
 -- --------------------------------------------------------
 
@@ -1177,9 +1193,10 @@ ALTER TABLE `permisos`
 -- Indices de la tabla `personas`
 --
 ALTER TABLE `personas`
-  ADD PRIMARY KEY (`documento_per`),
+  ADD PRIMARY KEY (`id_per`),
   ADD KEY `codigo_tip` (`codigo_tip`),
-  ADD KEY `codigo_sem` (`codigo_sem`);
+  ADD KEY `codigo_sem` (`codigo_sem`),
+  ADD KEY `documento_per` (`documento_per`) USING BTREE;
 
 --
 -- Indices de la tabla `programas`
@@ -1194,6 +1211,12 @@ ALTER TABLE `proyectos`
   ADD PRIMARY KEY (`codigo_pro`),
   ADD KEY `codigo_ciu` (`codigo_ciu`),
   ADD KEY `codigo_tip_pro` (`codigo_tip_pro`);
+
+--
+-- Indices de la tabla `proyectos_profesor`
+--
+ALTER TABLE `proyectos_profesor`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `semilleros`
@@ -1219,10 +1242,52 @@ ALTER TABLE `tipoproyectos`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `estudiantes_proyectos`
+--
+ALTER TABLE `estudiantes_proyectos`
+  MODIFY `ide_est_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134681;
+
+--
+-- AUTO_INCREMENT de la tabla `personas`
+--
+ALTER TABLE `personas`
+  MODIFY `id_per` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `programas`
+--
+ALTER TABLE `programas`
+  MODIFY `codigo_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `codigo_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `codigo_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `proyectos_profesor`
+--
+ALTER TABLE `proyectos_profesor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `semilleros`
+--
+ALTER TABLE `semilleros`
+  MODIFY `codigo_sem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `tipopersonas`
+--
+ALTER TABLE `tipopersonas`
+  MODIFY `codigo_tip` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tipoproyectos`
+--
+ALTER TABLE `tipoproyectos`
+  MODIFY `codigo_tip_pro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
 
 --
 -- Restricciones para tablas volcadas

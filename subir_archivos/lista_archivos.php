@@ -12,57 +12,96 @@
     <!-- Estilos adicionales -->
 </head>
 <body>
+    
     <div class="container">
-        <h1>Lista de Archivos</h1>
+        <h1>Asignar profesores a proyectos</h1>
         <form method="post" action="procesar_asignacion.php">
             <ul class="file-list">
             <?php
             session_start();
             include('../conexion.php');
 
-            // Verificar si el usuario es un administrador
             if ($_SESSION['tipo'] == 3) {
-                // Consultar los proyectos para mostrar en la lista
-                $query = $conn->query("SELECT codigo_pro, rutaarchivo_pro FROM proyectos");
+                // Lista de proyectos SIN asignar
+                $query = $conn->query("SELECT * FROM proyectos WHERE codigo_pro NOT IN (SELECT fk_id_proyecto FROM profesores_proyectos)");
 
                 if ($query && $query->num_rows > 0) {
                     while ($row = $query->fetch_assoc()) {
                         $codigo_pro = $row['codigo_pro'];
                         $rutaArchivo = $row['rutaarchivo_pro'];
                         $nombreArchivo = basename($rutaArchivo);
+                        $name = $row['tiutlo_pro'];
+
                         echo "<li class='file-link'>";
-                        echo "<a href='$rutaArchivo'><i class='fas fa-file'></i> $nombreArchivo</a>";
-                        echo "<div class='context-menu'>";
-                        echo "<form method='POST' action='procesar_asignacion.php'>";
-                        echo "<input type='hidden' name='codigo_pro' value='$codigo_pro'>";
-                        echo "<select name='documento_per'>";
-                        echo "<option value=''>Seleccionar Profesor</option>";
-                        $query_profesores = $conn->query("SELECT documento_per, nombre_per FROM personas WHERE codigo_tip = 2");
-                        if ($query_profesores && $query_profesores->num_rows > 0) {
-                            while ($profesor = $query_profesores->fetch_assoc()) {
-                                echo "<option value='" . $profesor['documento_per'] . "'>" . $profesor['nombre_per'] . "</option>";
-                            }
-                        }
-                        echo "</select>";
-                        echo "<button type='submit'>Asignar</button>";
-                        echo "</form>";
-                        echo "</div>";
+                            echo "<a><i class='fas fa-file'></i> $name</a>";
+                            echo "<div class='context-menu'>";
+                                echo "<form method='POST' action='procesar_asignacion.php'>";
+                                    echo "<input type='hidden' name='codigo_pro' value='$codigo_pro'>";
+                                    echo "<select name='documento_per'>";
+                                        echo "<option value=''>Seleccionar Profesor</option>";
+                                        $query_profesores = $conn->query("SELECT * FROM personas WHERE codigo_tip = 2");
+                                        if ($query_profesores && $query_profesores->num_rows > 0) {
+                                            while ($profesor = $query_profesores->fetch_assoc()) {
+                                                echo "<option value='" . $profesor['id_per'] . "'>" . $profesor['nombre_per'].' '.$profesor['apellidos_per'] . "</option>";
+                                            }
+                                        }
+                                    echo "</select>";
+                                    echo "<button type='submit'>Asignar</button>";
+                                echo "</form>";
+                            echo "</div>";
                         echo "</li>";
                     }
                 } else {
-                    echo "<p>No hay archivos disponibles.</p>";
+                    echo "<p>No hay proyectos disponibles para asignar.</p>";
                 }
             } else {
                 echo "<p>Acceso denegado. Esta función solo está disponible para administradores.</p>";
             }
-            $conn->close();
             ?>
             </ul>
         </form>
     </div>
-    <a href="../admin.php" class="btn">Ir al inicio</a>
-</body>
-</html>
+
+    <!-- NUEVA SECCIÓN: Proyectos YA ASIGNADOS -->
+    <div class="container" style="margin-top: 30px;">
+        <h2>Proyectos ya asignados</h2>
+        <ul class="file-list">
+        <?php
+        if ($_SESSION['tipo'] == 3) {
+            $query_asignados = $conn->query("
+                SELECT 
+                    pro.tiutlo_pro,
+                    pro.rutaarchivo_pro,
+                    p.nombre_per,
+                    p.apellidos_per
+                FROM profesores_proyectos pp
+                INNER JOIN proyectos pro ON pro.codigo_pro = pp.fk_id_proyecto
+                INNER JOIN personas p ON p.id_per = pp.fk_id_profesor
+            ");
+
+            if ($query_asignados && $query_asignados->num_rows > 0) {
+                while ($row = $query_asignados->fetch_assoc()) {
+                    $titulo = $row['tiutlo_pro'];
+                    $archivo = $row['rutaarchivo_pro'];
+                    $profesor = $row['nombre_per'] . ' ' . $row['apellidos_per'];
+
+                    echo "<li class='file-link'>";
+                        echo "<a><i class='fas fa-file'></i> $titulo</a>";
+                        echo "<div class='context-menu'>";
+                            echo "<p><strong>Profesor asignado:</strong> $profesor</p>";
+                            echo "<p><a href='$archivo' target='_blank'>Ver archivo</a></p>";
+                        echo "</div>";
+                    echo "</li>";
+                }
+            } else {
+                echo "<p>No hay proyectos asignados aún.</p>";
+            }
+
+            $conn->close();
+        }
+        ?>
+        </ul>
+    </div>
 
     
     <!-- Script de Font Awesome -->

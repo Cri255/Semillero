@@ -25,12 +25,9 @@ $result = $conn->query($sql);
         <tr>
             <th>Documento</th>
             <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Email</th>
-            <th>Teléfono</th>     
-            <th>Estado</th>
-            <th>Password</th>
+            <th>Apellidos</th>            
+            <th>Email</th>                 
+            <th>Estado</th>            
             <th>Acciones</th>
         </tr>
         <?php
@@ -39,12 +36,9 @@ $result = $conn->query($sql);
                 echo "<tr>";
                 echo "<td>" . $row["documento_per"] . "</td>";
                 echo "<td>" . $row["nombre_per"] . "</td>";
-                echo "<td>" . $row["apellidos_per"] . "</td>";
-                echo "<td>" . $row["fechanacimiento"] . "</td>";
-                echo "<td>" . $row["email_per"] . "</td>";
-                echo "<td>" . $row["telefono_per"] . "</td>";
-                echo "<td>" . $row["estado_per"] . "</td>";
-                echo "<td>" . $row["password_per"] . "</td>";
+                echo "<td>" . $row["apellidos_per"] . "</td>";                
+                echo "<td>" . $row["email_per"] . "</td>";                
+                echo "<td>" . $row["estado_per"] . "</td>";                
                 echo '<td><button><a href="editar.php?id=' . $row["documento_per"] . '"><i class="fas fa-edit"></i></a></button> | <button><a href="eliminar.php?id=' . $row["documento_per"] . '"><i class="fas fa-trash-alt"></i></a></button></td>';
 
                 echo "</tr>";

@@ -23,7 +23,6 @@
 <body>
     <h2>Lista de Programas Académicos</h2>
     <button onclick="window.location.href='crear.php';" class="back-to-top">Agregar nuevo Programa</button>
-    <button onclick="window.location.href='../admin.php';" class="back-to-top">Volver a Inicio</button>
     <br><br>
     <table>
         <tr>
